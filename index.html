@@ -1,14 +1,41 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Boon">
-<link rel="apple-touch-icon" href="data:image/png;base64,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"><title>Boon</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-<style>*{box-sizing:border-box;margin:0;padding:0}html,body{background:#F7F5F0;font-family:Inter,sans-serif;min-height:100vh}#root{max-width:480px;margin:0 auto}</style>
-</head><body><div id="root"></div>
-<script>const {useState,useEffect,useCallback,useMemo}=React;</script>
-<script>const PILLARS = [
+<html lang="en"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>Boon</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<style>*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{background:#F7F5F0;font-family:Georgia,serif;}
+button{cursor:pointer;font-family:inherit;}
+input{font-family:inherit;}
+::-webkit-scrollbar{display:none;}
+</style>
+</head><body>
+<div id="root"></div>
+<script>
+const {useState,useEffect,useRef,useCallback}=React;
+var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
+const PILLARS = [
   { id: "fitness", name: "Fitness", icon: "\u{1F3C3}", color: "#7EB8A4", desc: "Strength, endurance, movement" },
   { id: "diet", name: "Diet", icon: "\u{1F34E}", color: "#88C47A", desc: "Nutrition, hydration, fasting" },
   { id: "mind", name: "Mind", icon: "\u{1F9E0}", color: "#A89BC2", desc: "Emotional wellbeing, purity" },
@@ -3096,7 +3123,7 @@ function computeBoons(state, debug = false) {
     for (const b of BOONS) {
       if (nb.includes(b.id)) continue;
       if (b.pillar !== "synergy" && (state.streaks[`${b.pillar}_active`] || 0) === 0) continue;
-      if (b.condition({ ...state, boons: nb })) {
+      if (b.condition(__spreadProps(__spreadValues({}, state), { boons: nb }))) {
         if (debug) console.log(`BOON: ${b.id} | ${b.pillar}_active=${state.streaks[`${b.pillar}_active`]} | streaks:`, Object.fromEntries(Object.entries(state.streaks).filter(([k]) => k.startsWith(b.pillar))));
         nb.push(b.id);
         changed = true;
@@ -3112,7 +3139,7 @@ function getAchievementStatus(ach, checkins, earnedAchievements, currentDay) {
 }
 function checkCrossPillarAchievements(checkins, boons, earnedAchievements, todayKey) {
   const today = todayKey;
-  const newEarned = { ...earnedAchievements };
+  const newEarned = __spreadValues({}, earnedAchievements);
   const newlyEarned = [];
   const todayData = checkins[today] || {};
   const allPillarsDone = PILLARS.every((p) => {
@@ -3129,8 +3156,8 @@ function checkCrossPillarAchievements(checkins, boons, earnedAchievements, today
   }
   return { newEarned, newlyEarned };
 }
-function getBoonStatus(boon, checkins, boons, streaks) {
-  var _a;
+function getBoonStatus(boon, checkins, boons, streaks, state = {}) {
+  var _a, _b;
   const notEarned = !boons.includes(boon.id);
   if (boon.pillar === "synergy") {
     const permanentIds = ["integrated_man", "integrated_man_ii", "integrated_man_iii"];
@@ -3142,6 +3169,21 @@ function getBoonStatus(boon, checkins, boons, streaks) {
   const threshold = boon.need || 3;
   const multiplier = DECAY_MULTIPLIER[boon.pillar] || 3;
   const window2 = threshold * multiplier;
+  const earnedDay = (state.boonEarnedDay || {})[boon.id];
+  const currentDay = state.currentDay || 1;
+  if (earnedDay !== void 0 && currentDay - earnedDay < window2) {
+    const graceDays = Object.keys(checkins).filter((k) => k.startsWith("day_")).sort((a, b) => parseInt(b.replace("day_", "")) - parseInt(a.replace("day_", ""))).slice(0, window2);
+    const gracePillarId = streakKey.split("_")[0];
+    const graceCheckId = streakKey.slice(gracePillarId.length + 1);
+    let graceCount = 0;
+    for (const dk of graceDays) {
+      const graceDay = checkins[dk];
+      if (!graceDay) continue;
+      const graceDrawnIds = ((_a = graceDay.__drawn) == null ? void 0 : _a[gracePillarId]) || [];
+      if (graceDrawnIds.includes(graceCheckId) && graceDay[`${gracePillarId}_${graceCheckId}`]) graceCount++;
+    }
+    return { dormant: false, count: graceCount, needed: threshold, window: window2, graceActive: true };
+  }
   const allDays = Object.keys(checkins).filter((k) => k.startsWith("day_")).sort((a, b) => parseInt(b.replace("day_", "")) - parseInt(a.replace("day_", ""))).slice(0, window2);
   const pillarId = streakKey.split("_")[0];
   const checkId = streakKey.slice(pillarId.length + 1);
@@ -3149,14 +3191,14 @@ function getBoonStatus(boon, checkins, boons, streaks) {
   for (const dk of allDays) {
     const day = checkins[dk];
     if (!day) continue;
-    const drawnIds = ((_a = day.__drawn) == null ? void 0 : _a[pillarId]) || [];
+    const drawnIds = ((_b = day.__drawn) == null ? void 0 : _b[pillarId]) || [];
     if (drawnIds.includes(checkId) && day[`${pillarId}_${checkId}`]) count++;
   }
   const dormant = boons.includes(boon.id) && count < threshold;
   return { dormant, count, needed: threshold, window: window2 };
 }
-function isBoonDormant(boon, checkins, boons, streaks) {
-  return getBoonStatus(boon, checkins, boons, streaks).dormant;
+function isBoonDormant(boon, checkins, boons, streaks, state = {}) {
+  return getBoonStatus(boon, checkins, boons, streaks, state).dormant;
 }
 function hexToRgb(hex) {
   return [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)].join(",");
@@ -3195,6 +3237,8 @@ function getEmptyState() {
     // { boonId: consecutiveDaysActive } — for stack multiplier
     trophies: {},
     // { trophyId: { date: "day_N" } }
+    boonEarnedDay: {},
+    // { boonId: dayNumber } — day the boon was first earned
     boonDecayReturns: 0,
     // times a boon was re-earned after decay
     hardcoreDays: 0,
@@ -3313,7 +3357,7 @@ function App() {
           });
           migratedCheckins[dk] = newDay;
         });
-        const migratedState = { ...saved, checkins: migratedCheckins };
+        const migratedState = __spreadProps(__spreadValues({}, saved), { checkins: migratedCheckins });
         setState(migratedState);
         saveToStorage(migratedState);
         setState(migratedState);
@@ -3416,7 +3460,7 @@ function App() {
   function handleCheck(key) {
     if (!submitted) {
       const wasChecked = !!todayChecks[key];
-      setTodayChecks((p) => ({ ...p, [key]: !p[key] }));
+      setTodayChecks((p) => __spreadProps(__spreadValues({}, p), { [key]: !p[key] }));
       if (!wasChecked) playChime();
     }
   }
@@ -3427,12 +3471,12 @@ function App() {
       const drawn = drawChecks(p.id, todayKey, currentState.boons, currentState.checkins, 4, currentState);
       drawnToday[p.id] = drawn.map((c) => c.id);
     }
-    const todayData = { ...checks, __drawn: drawnToday };
-    const nc = { ...currentState.checkins, [todayKey]: todayData };
+    const todayData = __spreadProps(__spreadValues({}, checks), { __drawn: drawnToday });
+    const nc = __spreadProps(__spreadValues({}, currentState.checkins), { [todayKey]: todayData });
     const ns = computeStreaks(nc, currentState.boons, currentState.currentDay || 1);
-    const draft = { ...currentState, checkins: nc, streaks: ns, lastCheckin: todayKey };
-    const newT1Progress = { ...currentState.pillarT1Progress || {} };
-    const newT1Unlocked = { ...currentState.pillarT1Unlocked || {} };
+    const draft = __spreadProps(__spreadValues({}, currentState), { checkins: nc, streaks: ns, lastCheckin: todayKey });
+    const newT1Progress = __spreadValues({}, currentState.pillarT1Progress || {});
+    const newT1Unlocked = __spreadValues({}, currentState.pillarT1Unlocked || {});
     for (const p of PILLARS) {
       if (!newT1Unlocked[p.id]) {
         if (!newT1Progress[p.id]) newT1Progress[p.id] = {};
@@ -3448,8 +3492,8 @@ function App() {
         if (unlockT1) newT1Unlocked[p.id] = true;
       }
     }
-    const newFeatCompletions = { ...currentState.featCompletions || {} };
-    const newLastFeatDrawn = { ...currentState.lastFeatDrawn || {} };
+    const newFeatCompletions = __spreadValues({}, currentState.featCompletions || {});
+    const newLastFeatDrawn = __spreadValues({}, currentState.lastFeatDrawn || {});
     for (const p of PILLARS) {
       const feats = CHECK_POOLS[p.id].filter((c) => c.feat);
       for (const feat of feats) {
@@ -3462,11 +3506,11 @@ function App() {
         }
       }
     }
-    const newCalendarDates = { ...currentState.calendarDates || {} };
+    const newCalendarDates = __spreadValues({}, currentState.calendarDates || {});
     if (!newCalendarDates[todayKey]) {
       newCalendarDates[todayKey] = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
     }
-    const newAch = { ...currentState.achievements };
+    const newAch = __spreadValues({}, currentState.achievements);
     const newlyAch = [];
     for (const ach2 of ACHIEVEMENTS) {
       if (ach2.earnedBy.startsWith("__")) continue;
@@ -3475,7 +3519,7 @@ function App() {
           newAch[ach2.id] = { date: todayKey, count: 1 };
           newlyAch.push(ach2.id);
         } else {
-          newAch[ach2.id] = { ...newAch[ach2.id], count: (newAch[ach2.id].count || 1) + 1 };
+          newAch[ach2.id] = __spreadProps(__spreadValues({}, newAch[ach2.id]), { count: (newAch[ach2.id].count || 1) + 1 });
         }
       }
     }
@@ -3514,17 +3558,22 @@ function App() {
       if (!newlyAch.includes(id)) newlyAch.push(id);
     });
     Object.assign(newAch, newEarned);
-    const fullDraft = {
-      ...draft,
+    const fullDraft = __spreadProps(__spreadValues({}, draft), {
       achievements: newAch,
       pillarT1Progress: newT1Progress,
       pillarT1Unlocked: newT1Unlocked,
       featCompletions: newFeatCompletions,
       lastFeatDrawn: newLastFeatDrawn,
       calendarDates: newCalendarDates
-    };
+    });
     const nb = computeBoons(fullDraft);
     const unlocked = nb.filter((b) => !currentState.boons.includes(b));
+    const newBoonEarnedDay = __spreadValues({}, currentState.boonEarnedDay || {});
+    for (const boonId of unlocked) {
+      if (newBoonEarnedDay[boonId] === void 0) {
+        newBoonEarnedDay[boonId] = currentState.currentDay || 1;
+      }
+    }
     setNewlyUnlocked(unlocked);
     setNewlyEarnedAch(newlyAch);
     setSubmitted(true);
@@ -3537,7 +3586,7 @@ function App() {
     } else if (newlyAch.length > 0) {
       showInsightQueue(newlyAch.map((id) => ACHIEVEMENTS.find((a) => a.id === id)).filter(Boolean));
     }
-    const newBoonStackDays = { ...currentState.boonStackDays || {} };
+    const newBoonStackDays = __spreadValues({}, currentState.boonStackDays || {});
     const prevBoons = currentState.boons || [];
     for (const boonId of prevBoons) {
       newBoonStackDays[boonId] = (newBoonStackDays[boonId] || 0) + 1;
@@ -3557,20 +3606,19 @@ function App() {
       newBoonStackDays,
       prevBoons
     );
-    const newScoreLog = { ...currentState.scoreLog || {}, [todayKey]: scoreBreakdown };
+    const newScoreLog = __spreadProps(__spreadValues({}, currentState.scoreLog || {}), { [todayKey]: scoreBreakdown });
     const newTotalScore = (currentState.totalScore || 0) + scoreBreakdown.total;
-    const newTrophies = { ...currentState.trophies || {} };
+    const newTrophies = __spreadValues({}, currentState.trophies || {});
     const newlyEarnedTrophies = [];
-    const trophyState = {
-      ...fullDraft,
+    const trophyState = __spreadProps(__spreadValues({}, fullDraft), {
       boons: nb,
       totalScore: newTotalScore,
       scoreLog: newScoreLog,
-      streaks: { ...ns },
+      streaks: __spreadValues({}, ns),
       completions: Object.fromEntries(
         Object.entries(ns).filter(([k]) => !k.endsWith("_full") && !k.endsWith("_active"))
       )
-    };
+    });
     for (const trophy of TROPHIES) {
       if (newTrophies[trophy.id]) continue;
       let earned = false;
@@ -3591,15 +3639,15 @@ function App() {
         playDeepBell();
       }, newlyUnlocked.length > 0 ? 3e3 : 500);
     }
-    update({
-      ...fullDraft,
+    update(__spreadProps(__spreadValues({}, fullDraft), {
       boons: nb,
       dayEnded: true,
       boonStackDays: newBoonStackDays,
       scoreLog: newScoreLog,
       totalScore: newTotalScore,
-      trophies: newTrophies
-    });
+      trophies: newTrophies,
+      boonEarnedDay: newBoonEarnedDay
+    }));
   }
   function handleSave() {
     const drawnToday = {};
@@ -3607,11 +3655,11 @@ function App() {
       const drawn = drawChecks(p.id, todayKey, state.boons, state.checkins, 4, state);
       drawnToday[p.id] = drawn.map((c) => c.id);
     }
-    const newCalendarDates = { ...state.calendarDates || {} };
+    const newCalendarDates = __spreadValues({}, state.calendarDates || {});
     if (!newCalendarDates[todayKey]) newCalendarDates[todayKey] = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-    const todayData = { ...todayChecks, __drawn: drawnToday };
-    const nc = { ...state.checkins, [todayKey]: todayData };
-    update({ ...state, checkins: nc, calendarDates: newCalendarDates });
+    const todayData = __spreadProps(__spreadValues({}, todayChecks), { __drawn: drawnToday });
+    const nc = __spreadProps(__spreadValues({}, state.checkins), { [todayKey]: todayData });
+    update(__spreadProps(__spreadValues({}, state), { checkins: nc, calendarDates: newCalendarDates }));
   }
   function handleEndDay() {
     processSubmit(todayChecks, state);
@@ -3641,17 +3689,16 @@ function App() {
           newHardcoreStreak = 1;
         }
       }
-      update({
-        ...state,
+      update(__spreadProps(__spreadValues({}, state), {
         currentDay: nextDay,
         dayEnded: false,
         lastCheckin: null,
         hardcoreLastDate: todayDate,
         hardcoreStreak: newHardcoreStreak,
         hardcoreDays: newHardcoreDays
-      });
+      }));
     } else {
-      update({ ...state, currentDay: nextDay, dayEnded: false, lastCheckin: null });
+      update(__spreadProps(__spreadValues({}, state), { currentDay: nextDay, dayEnded: false, lastCheckin: null }));
     }
     setTodayChecks({});
     setSubmitted(false);
@@ -3665,14 +3712,14 @@ function App() {
   function devSimulate() {
     const ci = generateFakeHistory(devDays, state);
     const ns = computeStreaks(ci, state.boons, state.currentDay || 1);
-    const draft = { ...state, checkins: ci, streaks: ns };
+    const draft = __spreadProps(__spreadValues({}, state), { checkins: ci, streaks: ns });
     const nb = computeBoons(draft);
-    update({ ...draft, boons: nb, lastCheckin: null });
+    update(__spreadProps(__spreadValues({}, draft), { boons: nb, lastCheckin: null }));
     setSubmitted(false);
     setTodayChecks({});
   }
   function devOneDay() {
-    const ci = { ...state.checkins };
+    const ci = __spreadValues({}, state.checkins);
     const currentDay = state.currentDay || 1;
     let target = currentDay - 1;
     while (target >= 1 && ci[`day_${target}`]) target--;
@@ -3690,10 +3737,10 @@ function App() {
       }
     }
     const ns = computeStreaks(ci, state.boons, state.currentDay || 1);
-    const draft = { ...state, checkins: ci, streaks: ns };
+    const draft = __spreadProps(__spreadValues({}, state), { checkins: ci, streaks: ns });
     const nb = computeBoons(draft, true);
     const unlocked = nb.filter((b) => !state.boons.includes(b));
-    update({ ...draft, boons: nb, lastCheckin: null });
+    update(__spreadProps(__spreadValues({}, draft), { boons: nb, lastCheckin: null }));
     setSubmitted(false);
     setTodayChecks({});
     if (unlocked.length > 0) {
@@ -3702,7 +3749,7 @@ function App() {
     }
   }
   function devSetStreaks(n) {
-    const ci = { ...state.checkins };
+    const ci = __spreadValues({}, state.checkins);
     const currentDay = state.currentDay || 1;
     for (let i = 0; i < n; i++) {
       const dk = `day_${Math.max(1, currentDay - i)}`;
@@ -3716,9 +3763,9 @@ function App() {
       }
     }
     const ns = computeStreaks(ci, state.boons, state.currentDay || 1);
-    const draft = { ...state, checkins: ci, streaks: ns };
+    const draft = __spreadProps(__spreadValues({}, state), { checkins: ci, streaks: ns });
     const nb = computeBoons(draft);
-    update({ ...draft, boons: nb, lastCheckin: null });
+    update(__spreadProps(__spreadValues({}, draft), { boons: nb, lastCheckin: null }));
     setSubmitted(false);
     setTodayChecks({});
   }
@@ -3727,7 +3774,7 @@ function App() {
     ACHIEVEMENTS.forEach((a) => {
       allAch[a.id] = { date: `day_${state.currentDay || 1}` };
     });
-    update({ ...state, boons: BOONS.map((b) => b.id), achievements: allAch });
+    update(__spreadProps(__spreadValues({}, state), { boons: BOONS.map((b) => b.id), achievements: allAch }));
   }
   function devReset() {
     const f = { checkins: {}, streaks: {}, boons: [], achievements: {}, lastCheckin: null, debugStreaks: null, currentDay: 1, dayEnded: false };
@@ -3747,7 +3794,7 @@ function App() {
   const filteredBoons = BOONS.filter((b) => {
     if (boonFilter === "all") return true;
     if (boonFilter === "unlocked") return state.boons.includes(b.id);
-    if (boonFilter === "available") return !state.boons.includes(b.id) && b.condition({ ...state, streaks });
+    if (boonFilter === "available") return !state.boons.includes(b.id) && b.condition(__spreadProps(__spreadValues({}, state), { streaks }));
     if (boonFilter === "synergy") return b.pillar === "synergy";
     return b.pillar === boonFilter;
   });
@@ -3797,7 +3844,7 @@ function App() {
     const showQuote = Math.random() < 0.25;
     if (showQuote) {
       const q = LOADING_QUOTES[Math.floor(Math.random() * LOADING_QUOTES.length)];
-      setLoadingItem({ type: "quote", ...q });
+      setLoadingItem(__spreadValues({ type: "quote" }, q));
     } else {
       const locked = BOONS.filter((b) => !state.boons.includes(b.id) && b.pillar !== "synergy" && b.insight);
       if (locked.length > 0) {
@@ -3890,7 +3937,7 @@ function App() {
           animation:redSweep 4.5s ease-in-out infinite;}
         .achNew{animation:achGlow 1.8s ease-in-out 2;}
         .slide{animation:slideUp 0.35s ease;}
-      `), showDayStart && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => setShowDayStart(false) }, /* @__PURE__ */ React.createElement("div", { style: { ...S.modal, maxHeight: "80vh", overflowY: "auto" }, onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 26, fontWeight: 700, color: "#1a1814", marginBottom: 4 } }, "Day ", state.currentDay), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12, color: "#b0a080", letterSpacing: "0.04em" } }, "HERE'S WHERE YOU STAND"), /* @__PURE__ */ React.createElement("button", { onClick: () => setShowDayStart(false), style: { ...S.submit, width: "auto", padding: "8px 18px", fontSize: 13, boxShadow: "none" } }, "Let's go \u2726")), PILLARS.map((p) => {
+      `), showDayStart && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => setShowDayStart(false) }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.modal), { maxHeight: "80vh", overflowY: "auto" }), onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 26, fontWeight: 700, color: "#1a1814", marginBottom: 4 } }, "Day ", state.currentDay), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12, color: "#b0a080", letterSpacing: "0.04em" } }, "HERE'S WHERE YOU STAND"), /* @__PURE__ */ React.createElement("button", { onClick: () => setShowDayStart(false), style: __spreadProps(__spreadValues({}, S.submit), { width: "auto", padding: "8px 18px", fontSize: 13, boxShadow: "none" }) }, "Let's go \u2726")), PILLARS.map((p) => {
     const liveStreaks = computeStreaks(state.checkins, state.boons, state.currentDay || 1);
     const liveBoons = state.boons;
     const unearned = BOONS.filter((b) => b.pillar === p.id && !liveBoons.includes(b.id));
@@ -3915,7 +3962,7 @@ function App() {
     "button",
     {
       onClick: () => setShowDayStart(false),
-      style: { ...S.submit, marginTop: 8 }
+      style: __spreadProps(__spreadValues({}, S.submit), { marginTop: 8 })
     },
     "Let's go \u2726"
   ))), trophyReveal && /* @__PURE__ */ React.createElement("div", { onClick: () => {
@@ -3960,7 +4007,7 @@ function App() {
     marginTop: 12,
     textAlign: "center",
     animation: "trophyFade 0.8s ease 0.7s both"
-  } }, "\u2014 ", trophyReveal.source), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", bottom: 48, fontSize: 12, color: "#333", letterSpacing: "0.08em" } }, trophyRevealQueue.length > 0 ? `tap for next \xB7 ${trophyRevealQueue.length} more` : "tap to continue")), insightItem && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => dismissInsight() }, /* @__PURE__ */ React.createElement("div", { style: S.modal, className: "slide", onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: S.modalTag }, insightItem.pillar === "synergy" ? "\u2726 Synergy" : insightItem.earnedBy ? `\u2295 Achievement \xB7 ${((_b = pillarMap[insightItem.pillar]) == null ? void 0 : _b.name) || ""}` : `${((_c = pillarMap[insightItem.pillar]) == null ? void 0 : _c.icon) || ""} ${((_d = pillarMap[insightItem.pillar]) == null ? void 0 : _d.name) || ""}`), /* @__PURE__ */ React.createElement("div", { style: { ...S.modalTitle, color: insightItem.earnedBy ? "#7EB8A4" : ((_e = pillarMap[insightItem.pillar]) == null ? void 0 : _e.color) || "#3D5A8A" } }, insightItem.earnedBy ? "\u2295" : "\u2726", " ", insightItem.name), insightItem.daysValid !== void 0 && /* @__PURE__ */ React.createElement("div", { style: S.modalTier }, insightItem.daysValid === null ? "Permanent achievement" : insightItem.daysValid === 1 ? "Lasts 1 day" : `Lasts ${insightItem.daysValid} days`), !insightItem.earnedBy && /* @__PURE__ */ React.createElement("div", { style: S.modalTier }, "Tier ", insightItem.tier, " Boon"), /* @__PURE__ */ React.createElement("div", { style: S.modalInsight }, insightItem.insight), /* @__PURE__ */ React.createElement("div", { style: S.modalSource }, "\u2014 ", insightItem.source), /* @__PURE__ */ React.createElement("button", { onClick: () => dismissInsight(), style: S.modalClose }, insightQueue.length > 0 ? `Next \u2726 (${insightQueue.length} more)` : "Close"))), /* @__PURE__ */ React.createElement("div", { style: S.header }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: S.title }, "Boon")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 5 } }, /* @__PURE__ */ React.createElement("div", { style: S.statRow }, /* @__PURE__ */ React.createElement("span", { style: { ...S.statChip, color: "#666", borderColor: "#252520" } }, "Day ", totalDays), /* @__PURE__ */ React.createElement("span", { style: S.statChip }, "\u2726 ", unlockedBoonCount, "/", BOONS.length), /* @__PURE__ */ React.createElement("span", { style: { ...S.statChip, color: "#7EB8A4", borderColor: "#7EB8A4" } }, "\u2295 ", activeAchCount), /* @__PURE__ */ React.createElement("span", { style: { ...S.statChip, color: "#C4973A", borderColor: "#C4973A", fontWeight: 600 } }, "\u2605 ", totalScore.toLocaleString()), state.hardcoreMode && /* @__PURE__ */ React.createElement("span", { style: { ...S.statChip, color: "#D4848A", borderColor: "#D4848A", fontWeight: 700 } }, "\u2694\uFE0F ", state.hardcoreStreak || 0, "d")), /* @__PURE__ */ React.createElement("button", { onClick: () => setDevOpen((o) => !o), style: S.devToggle, className: "db" }, "\u2630 Settings"))), (() => {
+  } }, "\u2014 ", trophyReveal.source), /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", bottom: 48, fontSize: 12, color: "#333", letterSpacing: "0.08em" } }, trophyRevealQueue.length > 0 ? `tap for next \xB7 ${trophyRevealQueue.length} more` : "tap to continue")), insightItem && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => dismissInsight() }, /* @__PURE__ */ React.createElement("div", { style: S.modal, className: "slide", onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: S.modalTag }, insightItem.pillar === "synergy" ? "\u2726 Synergy" : insightItem.earnedBy ? `\u2295 Achievement \xB7 ${((_b = pillarMap[insightItem.pillar]) == null ? void 0 : _b.name) || ""}` : `${((_c = pillarMap[insightItem.pillar]) == null ? void 0 : _c.icon) || ""} ${((_d = pillarMap[insightItem.pillar]) == null ? void 0 : _d.name) || ""}`), /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.modalTitle), { color: insightItem.earnedBy ? "#7EB8A4" : ((_e = pillarMap[insightItem.pillar]) == null ? void 0 : _e.color) || "#3D5A8A" }) }, insightItem.earnedBy ? "\u2295" : "\u2726", " ", insightItem.name), insightItem.daysValid !== void 0 && /* @__PURE__ */ React.createElement("div", { style: S.modalTier }, insightItem.daysValid === null ? "Permanent achievement" : insightItem.daysValid === 1 ? "Lasts 1 day" : `Lasts ${insightItem.daysValid} days`), !insightItem.earnedBy && /* @__PURE__ */ React.createElement("div", { style: S.modalTier }, "Tier ", insightItem.tier, " Boon"), /* @__PURE__ */ React.createElement("div", { style: S.modalInsight }, insightItem.insight), /* @__PURE__ */ React.createElement("div", { style: S.modalSource }, "\u2014 ", insightItem.source), /* @__PURE__ */ React.createElement("button", { onClick: () => dismissInsight(), style: S.modalClose }, insightQueue.length > 0 ? `Next \u2726 (${insightQueue.length} more)` : "Close"))), /* @__PURE__ */ React.createElement("div", { style: S.header }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: S.title }, "Boon")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 5 } }, /* @__PURE__ */ React.createElement("div", { style: S.statRow }, /* @__PURE__ */ React.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#666", borderColor: "#252520" }) }, "Day ", totalDays), /* @__PURE__ */ React.createElement("span", { style: S.statChip }, "\u2726 ", unlockedBoonCount, "/", BOONS.length), /* @__PURE__ */ React.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#7EB8A4", borderColor: "#7EB8A4" }) }, "\u2295 ", activeAchCount), /* @__PURE__ */ React.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#C4973A", borderColor: "#C4973A", fontWeight: 600 }) }, "\u2605 ", totalScore.toLocaleString()), state.hardcoreMode && /* @__PURE__ */ React.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#D4848A", borderColor: "#D4848A", fontWeight: 700 }) }, "\u2694\uFE0F ", state.hardcoreStreak || 0, "d")), /* @__PURE__ */ React.createElement("button", { onClick: () => setDevOpen((o) => !o), style: S.devToggle, className: "db" }, "\u2630 Settings"))), (() => {
     const items = [
       ...state.boons.map((id) => {
         var _a2;
@@ -4012,21 +4059,21 @@ function App() {
       "trophy_weight_10": { date: "day_10" },
       "trophy_hardcore_7": { date: "day_22" }
     };
-    update({ ...state, trophies: { ...state.trophies || {}, ...demoTrophies } });
-  }, style: { ...S.devBtn, color: "#C4973A", fontWeight: 500 } }, "\u{1F3C6} Demo Trophies")), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement(
+    update(__spreadProps(__spreadValues({}, state), { trophies: __spreadValues(__spreadValues({}, state.trophies || {}), demoTrophies) }));
+  }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#C4973A", fontWeight: 500 }) }, "\u{1F3C6} Demo Trophies")), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement(
     "button",
     {
       className: "db",
-      onClick: () => update({ ...state, trophies: {} }),
-      style: { ...S.devBtn, color: "#888", fontWeight: 500 }
+      onClick: () => update(__spreadProps(__spreadValues({}, state), { trophies: {} })),
+      style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#888", fontWeight: 500 })
     },
     "Clear Trophies"
   )), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("button", { className: "db", onClick: () => {
     const yesterday = /* @__PURE__ */ new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const yStr = yesterday.toISOString().slice(0, 10);
-    update({ ...state, hardcoreLastDate: yStr, dayEnded: true });
-  }, style: { ...S.devBtn, color: "#D4848A", fontWeight: 500 } }, "\u2694\uFE0F Simulate Next Day")), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("button", { className: "db", onClick: () => {
+    update(__spreadProps(__spreadValues({}, state), { hardcoreLastDate: yStr, dayEnded: true }));
+  }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#D4848A", fontWeight: 500 }) }, "\u2694\uFE0F Simulate Next Day")), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("button", { className: "db", onClick: () => {
     const data = JSON.stringify(state, null, 2);
     const blob = new Blob([data], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -4035,7 +4082,7 @@ function App() {
     a.download = `boon-backup-day${state.currentDay || 1}.json`;
     a.click();
     URL.revokeObjectURL(url);
-  }, style: { ...S.devBtn, color: "#7EB8A4", fontWeight: 500 } }, "\u2193 Export backup")), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("label", { style: { ...S.devBtn, color: "#A89BC2", fontWeight: 500, cursor: "pointer" } }, "\u2191 Import backup", /* @__PURE__ */ React.createElement("input", { type: "file", accept: ".json", style: { display: "none" }, onChange: (e) => {
+  }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#7EB8A4", fontWeight: 500 }) }, "\u2193 Export backup")), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("label", { style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#A89BC2", fontWeight: 500, cursor: "pointer" }) }, "\u2191 Import backup", /* @__PURE__ */ React.createElement("input", { type: "file", accept: ".json", style: { display: "none" }, onChange: (e) => {
     const file = e.target.files[0];
     if (!file) return;
     const reader = new FileReader();
@@ -4052,14 +4099,14 @@ function App() {
       }
     };
     reader.readAsText(file);
-  } }))), /* @__PURE__ */ React.createElement("div", { style: { borderTop: "1px solid #ECEEF8", paddingTop: 10 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Weight Log"), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("input", { type: "number", step: "0.1", placeholder: "lbs", id: "weight-input", style: { ...S.devInput, width: 70 } }), /* @__PURE__ */ React.createElement("button", { className: "db", onClick: () => {
+  } }))), /* @__PURE__ */ React.createElement("div", { style: { borderTop: "1px solid #ECEEF8", paddingTop: 10 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Weight Log"), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("input", { type: "number", step: "0.1", placeholder: "lbs", id: "weight-input", style: __spreadProps(__spreadValues({}, S.devInput), { width: 70 }) }), /* @__PURE__ */ React.createElement("button", { className: "db", onClick: () => {
     const val = parseFloat(document.getElementById("weight-input").value);
     if (!val || val <= 0) return;
     const entry = { day: state.currentDay || 1, weight: val, ts: Date.now() };
     const log = [...state.weightLog || [], entry];
-    update({ ...state, weightLog: log });
+    update(__spreadProps(__spreadValues({}, state), { weightLog: log }));
     document.getElementById("weight-input").value = "";
-  }, style: { ...S.devBtn, color: "#7EB8A4", fontWeight: 500 } }, "+ Log weight")), (state.weightLog || []).length > 0 && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 8 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#1a1814", marginBottom: 4 } }, "Latest: ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 600, color: "#3D5A8A" } }, state.weightLog[state.weightLog.length - 1].weight, " lbs"), state.weightLog.length > 1 && (() => {
+  }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#7EB8A4", fontWeight: 500 }) }, "+ Log weight")), (state.weightLog || []).length > 0 && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 8 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#1a1814", marginBottom: 4 } }, "Latest: ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 600, color: "#3D5A8A" } }, state.weightLog[state.weightLog.length - 1].weight, " lbs"), state.weightLog.length > 1 && (() => {
     const diff = state.weightLog[state.weightLog.length - 1].weight - state.weightLog[0].weight;
     return /* @__PURE__ */ React.createElement("span", { style: { color: diff < 0 ? "#7EB8A4" : diff > 0 ? "#D4848A" : "#b0a080", marginLeft: 8, fontSize: 11 } }, diff === 0 ? "\u2014" : diff < 0 ? `\u2193 ${Math.abs(diff).toFixed(1)}` : `\u2191 ${diff.toFixed(1)}`, " since first log");
   })()), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 4, fontSize: 10, color: "#b0a080" } }, state.weightLog.slice(-8).map((e, i) => /* @__PURE__ */ React.createElement("span", { key: i, style: { background: "#ECEEF8", borderRadius: 6, padding: "2px 6px" } }, "Day ", e.day, ": ", e.weight))))), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#b0a080", paddingTop: 4, borderTop: "1px solid #ECEEF8", lineHeight: 1.8 } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", { style: { color: "#1a1814", fontWeight: 500 } }, "Boon")), /* @__PURE__ */ React.createElement("div", null, "Day ", state.currentDay || 1, " \xB7 ", state.boons.length, " boons \xB7 ", ACHIEVEMENTS.filter((a) => getAchievementStatus(a, state.checkins, state.achievements || {}, state.currentDay || 1) === "active").length, " achievements active"), /* @__PURE__ */ React.createElement("div", { style: { color: "#c0b8a8", fontSize: 10 } }, "Data stored locally on this device")), /* @__PURE__ */ React.createElement("div", { style: { borderTop: "1px solid #F0EDE6", paddingTop: 14 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: "#1a1814", display: "flex", alignItems: "center", gap: 6 } }, "\u2694\uFE0F Hardcore Mode", state.hardcoreMode && /* @__PURE__ */ React.createElement("span", { style: {
@@ -4072,9 +4119,9 @@ function App() {
     fontWeight: 700
   } }, "ACTIVE")), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginTop: 3, lineHeight: 1.5 } }, "One day per real calendar day. Miss a day and your hardcore streak breaks. Turning this off also breaks your streak."), state.hardcoreMode && state.hardcoreStreak > 0 && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#D4848A", marginTop: 4, fontWeight: 600 } }, "\u2694\uFE0F Current streak: ", state.hardcoreStreak, " day", state.hardcoreStreak !== 1 ? "s" : "")), /* @__PURE__ */ React.createElement("div", { onClick: () => {
     if (state.hardcoreMode) {
-      update({ ...state, hardcoreMode: false, hardcoreStreak: 0 });
+      update(__spreadProps(__spreadValues({}, state), { hardcoreMode: false, hardcoreStreak: 0 }));
     } else {
-      update({ ...state, hardcoreMode: true, hardcoreLastDate: null });
+      update(__spreadProps(__spreadValues({}, state), { hardcoreMode: true, hardcoreLastDate: null }));
     }
   }, style: {
     width: 44,
@@ -4099,7 +4146,7 @@ function App() {
   } })))), /* @__PURE__ */ React.createElement("div", { style: { borderTop: "1px solid #F0EDE6", paddingTop: 10 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 13, fontWeight: 500, color: "#1a1814" } }, "Weekend Mode"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginTop: 2 } }, "Feats are 5\xD7 more likely on weekends")), /* @__PURE__ */ React.createElement(
     "div",
     {
-      onClick: () => update({ ...state, weekendMode: !state.weekendMode }),
+      onClick: () => update(__spreadProps(__spreadValues({}, state), { weekendMode: !state.weekendMode })),
       style: {
         width: 44,
         height: 26,
@@ -4122,7 +4169,7 @@ function App() {
       boxShadow: "0 1px 4px rgba(0,0,0,0.2)"
     } })
   ))), /* @__PURE__ */ React.createElement("div", { style: { borderTop: "1px solid #ECEEF8", paddingTop: 10 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Testing Tools"), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("span", { style: S.devLabel }, "+ 1 day for pillar:"), PILLARS.map((p) => /* @__PURE__ */ React.createElement("button", { key: p.id, className: "db", onClick: () => {
-    const ci = { ...state.checkins };
+    const ci = __spreadValues({}, state.checkins);
     const currentDay = state.currentDay || 1;
     let target = currentDay - 1;
     while (target >= 1 && ci[`day_${target}`]) target--;
@@ -4137,37 +4184,37 @@ function App() {
     }
     const ns = computeStreaks(ci, state.boons, state.currentDay || 1);
     const nextDay = (state.currentDay || 1) + 1;
-    const draft = { ...state, checkins: ci, streaks: ns, debugStreaks: null, currentDay: nextDay, dayEnded: false };
+    const draft = __spreadProps(__spreadValues({}, state), { checkins: ci, streaks: ns, debugStreaks: null, currentDay: nextDay, dayEnded: false });
     const nb = computeBoons(draft, true);
     const unlocked = nb.filter((b) => !state.boons.includes(b));
-    update({ ...draft, boons: nb });
+    update(__spreadProps(__spreadValues({}, draft), { boons: nb }));
     setSubmitted(false);
     setTodayChecks({});
     if (unlocked.length > 0) {
       setNewlyUnlocked(unlocked);
       setInsightItem(BOONS.find((b) => b.id === unlocked[0]) || null);
     }
-  }, style: { ...S.devBtn, color: p.color, padding: "4px 8px", fontSize: 12 } }, p.icon))), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("span", { style: { ...S.devLabel, color: "#D4848A" } }, "Set streaks"), /* @__PURE__ */ React.createElement("input", { type: "number", min: 1, max: 60, defaultValue: 5, id: "si", style: S.devInput }), /* @__PURE__ */ React.createElement("span", { style: S.devLabel }, "days for:"), PILLARS.map((p) => /* @__PURE__ */ React.createElement("button", { key: p.id, className: "db", onClick: () => {
+  }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: p.color, padding: "4px 8px", fontSize: 12 }) }, p.icon))), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement("span", { style: __spreadProps(__spreadValues({}, S.devLabel), { color: "#D4848A" }) }, "Set streaks"), /* @__PURE__ */ React.createElement("input", { type: "number", min: 1, max: 60, defaultValue: 5, id: "si", style: S.devInput }), /* @__PURE__ */ React.createElement("span", { style: S.devLabel }, "days for:"), PILLARS.map((p) => /* @__PURE__ */ React.createElement("button", { key: p.id, className: "db", onClick: () => {
     const n = Number(document.getElementById("si").value) || 5;
     const current = state.debugStreaks || computeStreaks(state.checkins, state.boons, state.currentDay || 1);
-    const ds = { ...current };
+    const ds = __spreadValues({}, current);
     CHECK_POOLS[p.id].forEach((c) => {
       ds[`${p.id}_${c.id}`] = n;
     });
     ds[`${p.id}_active`] = n;
     ds[`${p.id}_full`] = n;
-    const draft = { ...state, debugStreaks: ds, streaks: ds };
+    const draft = __spreadProps(__spreadValues({}, state), { debugStreaks: ds, streaks: ds });
     const nb = computeBoons(draft);
-    update({ ...draft, boons: nb });
-  }, style: { ...S.devBtn, color: p.color, padding: "4px 8px", fontSize: 12 } }, p.icon))), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement(
+    update(__spreadProps(__spreadValues({}, draft), { boons: nb }));
+  }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: p.color, padding: "4px 8px", fontSize: 12 }) }, p.icon))), /* @__PURE__ */ React.createElement("div", { style: S.devRow }, /* @__PURE__ */ React.createElement(
     "button",
     {
       className: "db",
       onClick: () => setShowResetConfirm(true),
-      style: { ...S.devBtn, color: "#D4848A", fontWeight: 500 }
+      style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#D4848A", fontWeight: 500 })
     },
     "\u21BA Reset everything"
-  ), /* @__PURE__ */ React.createElement("button", { className: "db", onClick: () => update({ ...state, debugStreaks: null }), style: S.devBtn }, "Clear overrides")), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#c0b8a8", marginTop: 4, lineHeight: 1.7 } }, PILLARS.map((p) => `${p.name}: ${(state.debugStreaks || computeStreaks(state.checkins, state.boons, state.currentDay || 1))[`${p.id}_active`] || 0}d`).join(" \xB7 ")))), hardcoreBlocked && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => setHardcoreBlocked(false) }, /* @__PURE__ */ React.createElement("div", { style: { ...S.modal, padding: "28px 24px", maxWidth: 320, borderTop: "3px solid #D4848A" }, onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 28, marginBottom: 10, textAlign: "center" } }, "\u2694\uFE0F"), /* @__PURE__ */ React.createElement("div", { style: {
+  ), /* @__PURE__ */ React.createElement("button", { className: "db", onClick: () => update(__spreadProps(__spreadValues({}, state), { debugStreaks: null })), style: S.devBtn }, "Clear overrides")), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#c0b8a8", marginTop: 4, lineHeight: 1.7 } }, PILLARS.map((p) => `${p.name}: ${(state.debugStreaks || computeStreaks(state.checkins, state.boons, state.currentDay || 1))[`${p.id}_active`] || 0}d`).join(" \xB7 ")))), hardcoreBlocked && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => setHardcoreBlocked(false) }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.modal), { padding: "28px 24px", maxWidth: 320, borderTop: "3px solid #D4848A" }), onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 28, marginBottom: 10, textAlign: "center" } }, "\u2694\uFE0F"), /* @__PURE__ */ React.createElement("div", { style: {
     fontFamily: "'Cormorant Garamond',serif",
     fontSize: 22,
     fontWeight: 700,
@@ -4191,7 +4238,7 @@ function App() {
       }
     },
     "Got it"
-  ))), showResetConfirm && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => setShowResetConfirm(false) }, /* @__PURE__ */ React.createElement("div", { style: { ...S.modal, padding: "28px 24px", maxWidth: 320 }, onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, fontWeight: 700, color: "#1a1814", marginBottom: 10 } }, "Reset everything?"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 14, color: "#6a6050", lineHeight: 1.6, marginBottom: 24 } }, "This will erase all your data \u2014 streaks, boons, achievements, and check history. This cannot be undone."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 10 } }, /* @__PURE__ */ React.createElement(
+  ))), showResetConfirm && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => setShowResetConfirm(false) }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.modal), { padding: "28px 24px", maxWidth: 320 }), onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, fontWeight: 700, color: "#1a1814", marginBottom: 10 } }, "Reset everything?"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 14, color: "#6a6050", lineHeight: 1.6, marginBottom: 24 } }, "This will erase all your data \u2014 streaks, boons, achievements, and check history. This cannot be undone."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 10 } }, /* @__PURE__ */ React.createElement(
     "button",
     {
       onClick: () => setShowResetConfirm(false),
@@ -4200,14 +4247,14 @@ function App() {
     "Cancel"
   ), /* @__PURE__ */ React.createElement("button", { onClick: () => {
     setShowResetConfirm(false);
-    const f = { ...getEmptyState() };
+    const f = __spreadValues({}, getEmptyState());
     update(f);
     setSubmitted(false);
     setTodayChecks({});
     setNewlyUnlocked([]);
     setNewlyEarnedAch([]);
     setInsightItem(null);
-  }, style: { flex: 1, padding: "14px", background: "#D4848A", border: "none", borderRadius: 16, fontSize: 15, fontWeight: 600, cursor: "pointer", color: "#fff" } }, "Reset \u21BA")))), showEndDayConfirm && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => setShowEndDayConfirm(false) }, /* @__PURE__ */ React.createElement("div", { style: { ...S.modal, padding: "28px 24px", maxWidth: 320 }, onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, fontWeight: 700, color: "#1a1814", marginBottom: 10 } }, "End the day?"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 14, color: "#6a6050", lineHeight: 1.6, marginBottom: 24 } }, "This will lock in today's progress and move you to the next day. You can't add more checks after this."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 10 } }, /* @__PURE__ */ React.createElement(
+  }, style: { flex: 1, padding: "14px", background: "#D4848A", border: "none", borderRadius: 16, fontSize: 15, fontWeight: 600, cursor: "pointer", color: "#fff" } }, "Reset \u21BA")))), showEndDayConfirm && /* @__PURE__ */ React.createElement("div", { style: S.overlay, onClick: () => setShowEndDayConfirm(false) }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.modal), { padding: "28px 24px", maxWidth: 320 }), onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, fontWeight: 700, color: "#1a1814", marginBottom: 10 } }, "End the day?"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 14, color: "#6a6050", lineHeight: 1.6, marginBottom: 24 } }, "This will lock in today's progress and move you to the next day. You can't add more checks after this."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: 10 } }, /* @__PURE__ */ React.createElement(
     "button",
     {
       onClick: () => setShowEndDayConfirm(false),
@@ -4227,9 +4274,9 @@ function App() {
   )))), (newlyUnlocked.length > 0 || newlyEarnedAch.length > 0) && !insightItem && /* @__PURE__ */ React.createElement("div", { style: S.toast }, newlyUnlocked.length > 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { style: S.toastTitle }, "\u2726 ", newlyUnlocked.length > 1 ? `${newlyUnlocked.length} Boons Unlocked` : "Boon Unlocked"), newlyUnlocked.map((id) => {
     const b = BOONS.find((x) => x.id === id);
     return /* @__PURE__ */ React.createElement("div", { key: id, style: S.toastItem }, /* @__PURE__ */ React.createElement("span", null, '"', b == null ? void 0 : b.name, '"'), /* @__PURE__ */ React.createElement("button", { className: "ib", onClick: () => setInsightItem(b), style: S.toastInsightBtn }, "Insight \u2192"));
-  })), newlyEarnedAch.length > 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { style: { ...S.toastTitle, color: "#7EB8A4", marginTop: newlyUnlocked.length > 0 ? 10 : 0 } }, "\u2295 ", newlyEarnedAch.length > 1 ? `${newlyEarnedAch.length} Achievements Earned` : "Achievement Earned"), newlyEarnedAch.map((id) => {
+  })), newlyEarnedAch.length > 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.toastTitle), { color: "#7EB8A4", marginTop: newlyUnlocked.length > 0 ? 10 : 0 }) }, "\u2295 ", newlyEarnedAch.length > 1 ? `${newlyEarnedAch.length} Achievements Earned` : "Achievement Earned"), newlyEarnedAch.map((id) => {
     const a = ACHIEVEMENTS.find((x) => x.id === id);
-    return /* @__PURE__ */ React.createElement("div", { key: id, style: S.toastItem }, /* @__PURE__ */ React.createElement("span", null, '"', a == null ? void 0 : a.name, '"'), /* @__PURE__ */ React.createElement("button", { className: "ib", onClick: () => setInsightItem(a), style: { ...S.toastInsightBtn, color: "#7EB8A4", fontWeight: 500 } }, "Insight \u2192"));
+    return /* @__PURE__ */ React.createElement("div", { key: id, style: S.toastItem }, /* @__PURE__ */ React.createElement("span", null, '"', a == null ? void 0 : a.name, '"'), /* @__PURE__ */ React.createElement("button", { className: "ib", onClick: () => setInsightItem(a), style: __spreadProps(__spreadValues({}, S.toastInsightBtn), { color: "#7EB8A4", fontWeight: 500 }) }, "Insight \u2192"));
   })), /* @__PURE__ */ React.createElement("button", { onClick: () => {
     setNewlyUnlocked([]);
     setNewlyEarnedAch([]);
@@ -4239,16 +4286,15 @@ function App() {
       key: v,
       className: "nb",
       onClick: () => setView(v),
-      style: {
-        ...S.navBtn,
+      style: __spreadProps(__spreadValues({}, S.navBtn), {
         opacity: view === v ? 1 : 0.45,
         background: view === v ? "#EEF0F8" : "transparent",
         color: view === v ? "#3D5A8A" : "#6a6050",
         fontWeight: view === v ? 500 : 400
-      }
+      })
     },
     label
-  ))), view === "checkin" && /* @__PURE__ */ React.createElement("div", { style: S.content }, /* @__PURE__ */ React.createElement("div", { style: { ...S.tabs, overflowX: "auto", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", scrollbarWidth: "none", msOverflowStyle: "none", paddingBottom: 8, alignItems: "flex-end" } }, PILLARS.map((p) => {
+  ))), view === "checkin" && /* @__PURE__ */ React.createElement("div", { style: S.content }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.tabs), { overflowX: "auto", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", scrollbarWidth: "none", msOverflowStyle: "none", paddingBottom: 8, alignItems: "flex-end" }) }, PILLARS.map((p) => {
     const drawn = drawChecks(p.id, todayKey, state.boons, state.checkins);
     const allDone = drawn.every((c) => todayChecks[`${p.id}_${c.id}`]);
     const tier = getUnlockedTier(p.id, state.boons);
@@ -4258,8 +4304,7 @@ function App() {
         key: p.id,
         className: "pt",
         onClick: () => setActivePillar(p.id),
-        style: {
-          ...S.tab,
+        style: __spreadProps(__spreadValues({}, S.tab), {
           minWidth: "18%",
           flexShrink: 0,
           scrollSnapAlign: "start",
@@ -4271,7 +4316,7 @@ function App() {
           paddingTop: activePillar === p.id ? "14px" : "12px",
           paddingBottom: activePillar === p.id ? "14px" : "12px",
           transition: "all 0.2s cubic-bezier(0.34,1.56,0.64,1)"
-        }
+        })
       },
       /* @__PURE__ */ React.createElement("span", { style: { fontSize: activePillar === p.id ? 18 : 14, transition: "font-size 0.2s" } }, p.icon),
       /* @__PURE__ */ React.createElement("span", { style: { fontSize: activePillar === p.id ? 10 : 9, marginTop: 1, fontWeight: activePillar === p.id ? 600 : 400, transition: "all 0.2s" } }, p.name),
@@ -4282,13 +4327,13 @@ function App() {
     const drawn = drawChecks(pillar.id, todayKey, state.boons, state.checkins, 4, state);
     const fullStreak = streaks[`${pillar.id}_full`] || 0;
     const tier = getUnlockedTier(pillar.id, state.boons);
-    return /* @__PURE__ */ React.createElement("div", { key: pillar.id, style: { animation: "ignite 0.28s ease" } }, /* @__PURE__ */ React.createElement("div", { style: S.pillarHead }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { ...S.pillarName, color: pillar.color } }, pillar.icon, " ", pillar.name), /* @__PURE__ */ React.createElement("div", { style: S.pillarDesc }, pillar.desc), (() => {
+    return /* @__PURE__ */ React.createElement("div", { key: pillar.id, style: { animation: "ignite 0.28s ease" } }, /* @__PURE__ */ React.createElement("div", { style: S.pillarHead }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.pillarName), { color: pillar.color }) }, pillar.icon, " ", pillar.name), /* @__PURE__ */ React.createElement("div", { style: S.pillarDesc }, pillar.desc), (() => {
       const hint = closeSynergyBoons.find(
         ({ missingBoon }) => missingBoon && BOONS.find((b) => b.id === missingBoon.id && b.pillar === pillar.id)
       );
       if (!hint) return null;
       return /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#C4973A", marginTop: 4, fontWeight: 500, letterSpacing: "0.04em" } }, "\u2726 ", hint.boon.name, " within reach");
-    })()), /* @__PURE__ */ React.createElement("div", { style: { textAlign: "right" } }, /* @__PURE__ */ React.createElement("div", { style: { ...S.streakNum, color: fullStreak > 0 ? pillar.color : "#333" } }, fullStreak), /* @__PURE__ */ React.createElement("div", { style: S.streakLbl }, "day streak"))), /* @__PURE__ */ React.createElement("div", { style: S.checkList }, drawn.map((check) => {
+    })()), /* @__PURE__ */ React.createElement("div", { style: { textAlign: "right" } }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.streakNum), { color: fullStreak > 0 ? pillar.color : "#333" }) }, fullStreak), /* @__PURE__ */ React.createElement("div", { style: S.streakLbl }, "day streak"))), /* @__PURE__ */ React.createElement("div", { style: S.checkList }, drawn.map((check) => {
       var _a2;
       const key = `${pillar.id}_${check.id}`;
       const checked = !!todayChecks[key];
@@ -4308,24 +4353,22 @@ function App() {
           key,
           className: cardClass,
           onClick: () => handleCheck(key),
-          style: {
-            ...S.checkRow,
+          style: __spreadProps(__spreadValues({}, S.checkRow), {
             cursor: submitted ? "default" : "pointer",
             opacity: submitted && !checked ? 0.4 : 1,
             background: isFeat ? "rgba(126,184,164,0.06)" : "#fff",
             border: isFeat ? `1.5px solid ${featColor || "rgba(126,184,164,0.35)"}` : boonEarned ? "2px solid #ff5500" : boonReady ? `2px solid #55aaff` : boonClose ? "1.5px solid rgba(61,90,138,0.4)" : "1.5px solid #ECE6D8",
             position: "relative",
             flexWrap: "wrap"
-          }
+          })
         },
         boonEarned && /* @__PURE__ */ React.createElement("div", { className: "redSweep" }),
         boonReady && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { className: "zap zap1" }), /* @__PURE__ */ React.createElement("div", { className: "zap zap2" }), /* @__PURE__ */ React.createElement("div", { className: "zap zap3" }), /* @__PURE__ */ React.createElement("div", { className: "ms ms1" }), /* @__PURE__ */ React.createElement("div", { className: "ms ms2" }), /* @__PURE__ */ React.createElement("div", { className: "ms ms3" }), /* @__PURE__ */ React.createElement("div", { className: "ms ms4" }), /* @__PURE__ */ React.createElement("div", { className: "ms ms5" }), /* @__PURE__ */ React.createElement("div", { className: "ms ms6" })),
-        /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 14, width: "100%" } }, /* @__PURE__ */ React.createElement("div", { className: checked ? "checkDone" : "", style: {
-          ...S.checkbox,
+        /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 14, width: "100%" } }, /* @__PURE__ */ React.createElement("div", { className: checked ? "checkDone" : "", style: __spreadProps(__spreadValues({}, S.checkbox), {
           background: checked ? isFeat ? "#7EB8A4" : pillar.color : "transparent",
           borderColor: checked ? isFeat ? "#7EB8A4" : pillar.color : isFeat ? "rgba(126,184,164,0.4)" : "#d8d0c0",
           transition: "all 0.2s"
-        } }, checked && /* @__PURE__ */ React.createElement("span", { style: { color: "#fff", fontSize: 11, fontWeight: 700 } }, "\u2713")), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { ...S.checkLbl, fontSize: 15, fontWeight: 600, color: "#1a1814", letterSpacing: "0.01em" } }, check.label), isFeat && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6, marginTop: 2 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, color: featColor || "#7EB8A4", letterSpacing: "0.06em", fontWeight: 700 } }, featCount >= 25 ? "\u{1F451} MASTER" : featCount >= 10 ? "\u2605 GOLD" : featCount >= 5 ? "\u25C6 SILVER" : "FEAT"), featCount > 0 && /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, color: featColor || "#7EB8A4", fontWeight: 600 } }, featCount, "\xD7")), !isFeat && check.tier >= 2 && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 9, color: pillar.color, marginTop: 1, letterSpacing: "0.05em", fontWeight: 500 } }, check.tier === 3 ? "T3" : "T2")), boonEarned && /* @__PURE__ */ React.createElement("span", { style: { fontSize: 18 }, className: "flameEmoji" }, "\u{1F525}"), boonReady && /* @__PURE__ */ React.createElement("span", { style: { fontSize: 14, color: "#55aaff" } }, "\u26A1")),
+        }) }, checked && /* @__PURE__ */ React.createElement("span", { style: { color: "#fff", fontSize: 11, fontWeight: 700 } }, "\u2713")), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.checkLbl), { fontSize: 15, fontWeight: 600, color: "#1a1814", letterSpacing: "0.01em" }) }, check.label), isFeat && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6, marginTop: 2 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, color: featColor || "#7EB8A4", letterSpacing: "0.06em", fontWeight: 700 } }, featCount >= 25 ? "\u{1F451} MASTER" : featCount >= 10 ? "\u2605 GOLD" : featCount >= 5 ? "\u25C6 SILVER" : "FEAT"), featCount > 0 && /* @__PURE__ */ React.createElement("span", { style: { fontSize: 9, color: featColor || "#7EB8A4", fontWeight: 600 } }, featCount, "\xD7")), !isFeat && check.tier >= 2 && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 9, color: pillar.color, marginTop: 1, letterSpacing: "0.05em", fontWeight: 500 } }, check.tier === 3 ? "T3" : "T2")), boonEarned && /* @__PURE__ */ React.createElement("span", { style: { fontSize: 18 }, className: "flameEmoji" }, "\u{1F525}"), boonReady && /* @__PURE__ */ React.createElement("span", { style: { fontSize: 14, color: "#55aaff" } }, "\u26A1")),
         completions > 0 && /* @__PURE__ */ React.createElement("div", { style: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 6, paddingTop: 6, borderTop: "1px solid #F2EEE3" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 10, color: "#b0a080" } }, trackingBoon && !boonEarned && `${Math.max(0, (trackingBoon.need || 0) - completions)} to go`), /* @__PURE__ */ React.createElement("span", { style: {
           color: boonEarned ? "#3D5A8A" : pillar.color,
           fontSize: 11,
@@ -4337,7 +4380,7 @@ function App() {
       );
     })), (() => {
       const unearned = BOONS.filter((b) => b.pillar === pillar.id && !state.boons.includes(b.id));
-      if (!unearned.length) return /* @__PURE__ */ React.createElement("div", { style: { ...S.hint, background: `rgba(${hexToRgb(pillar.color)},0.08)`, textAlign: "center", padding: "16px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 18, marginBottom: 4 } }, "\u2726"), /* @__PURE__ */ React.createElement("div", { style: { color: pillar.color, fontSize: 14, fontFamily: "'Cormorant Garamond',serif", fontWeight: 700 } }, "All ", pillar.name, " boons unlocked"));
+      if (!unearned.length) return /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.hint), { background: `rgba(${hexToRgb(pillar.color)},0.08)`, textAlign: "center", padding: "16px" }) }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 18, marginBottom: 4 } }, "\u2726"), /* @__PURE__ */ React.createElement("div", { style: { color: pillar.color, fontSize: 14, fontFamily: "'Cormorant Garamond',serif", fontWeight: 700 } }, "All ", pillar.name, " boons unlocked"));
       const scored = unearned.map((b) => {
         const sk = b.track || null;
         const thresh = b.need || 3;
@@ -4352,39 +4395,38 @@ function App() {
       const prereqId = prereqMatch ? prereqMatch[1] : null;
       const prereqBoon = prereqId && !state.boons.includes(prereqId) ? BOONS.find((b) => b.id === prereqId) : null;
       const ready = pct >= 100 && !prereqBoon;
-      return /* @__PURE__ */ React.createElement("div", { style: { ...S.hint, border: `1px solid rgba(${hexToRgb(pillar.color)},${ready ? 0.5 : 0.15})`, background: ready ? `rgba(${hexToRgb(pillar.color)},0.06)` : "#fff" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 3 } }, ready ? "\u2726 Ready to unlock" : "Next boon", " \xB7 Tier ", next.tier), /* @__PURE__ */ React.createElement("div", { style: { color: pillar.color, fontSize: 16, fontFamily: "'Cormorant Garamond',serif", fontWeight: 700, marginBottom: 2 } }, next.name), /* @__PURE__ */ React.createElement("div", { style: { color: "#6a6050", fontSize: 12, lineHeight: 1.4 } }, next.desc)), /* @__PURE__ */ React.createElement(
+      return /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.hint), { border: `1px solid rgba(${hexToRgb(pillar.color)},${ready ? 0.5 : 0.15})`, background: ready ? `rgba(${hexToRgb(pillar.color)},0.06)` : "#fff" }) }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 3 } }, ready ? "\u2726 Ready to unlock" : "Next boon", " \xB7 Tier ", next.tier), /* @__PURE__ */ React.createElement("div", { style: { color: pillar.color, fontSize: 16, fontFamily: "'Cormorant Garamond',serif", fontWeight: 700, marginBottom: 2 } }, next.name), /* @__PURE__ */ React.createElement("div", { style: { color: "#6a6050", fontSize: 12, lineHeight: 1.4 } }, next.desc)), /* @__PURE__ */ React.createElement(
         "button",
         {
           className: "ib",
           onClick: () => setInsightItem(next),
-          style: { ...S.peekBtn, background: `rgba(${hexToRgb(pillar.color)},0.1)`, color: pillar.color, marginLeft: 12, marginTop: 2, fontWeight: 500 }
+          style: __spreadProps(__spreadValues({}, S.peekBtn), { background: `rgba(${hexToRgb(pillar.color)},0.1)`, color: pillar.color, marginLeft: 12, marginTop: 2, fontWeight: 500 })
         },
         "Insight"
       )), streakKey && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { style: { height: 6, background: "#ECEEF8", borderRadius: 4, overflow: "hidden", marginBottom: 4 } }, /* @__PURE__ */ React.createElement("div", { style: { height: "100%", width: `${pct}%`, background: pillar.color, borderRadius: 4, transition: "width 0.4s ease" } })), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 11, color: "#b0a080" } }, /* @__PURE__ */ React.createElement("span", null, streakKey.replace(pillar.id + "_", "").replace(/_/g, " ")), /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 600, color: pct >= 100 ? pillar.color : "#b0a080" } }, currentCount, " / ", threshold))), prereqBoon && /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginTop: 6 } }, "Also needs: ", /* @__PURE__ */ React.createElement("span", { style: { color: pillar.color, fontWeight: 500 } }, prereqBoon.name)));
     })());
-  }), !submitted ? /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, /* @__PURE__ */ React.createElement("button", { className: "sb", onClick: handleSave, style: { ...S.submit, background: "rgba(61,90,138,0.15)", color: "#3D5A8A", boxShadow: "none" } }, "Save Progress"), /* @__PURE__ */ React.createElement("button", { className: "sb", onClick: () => setShowEndDayConfirm(true), style: S.submit }, "End Day \u2726")) : /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, /* @__PURE__ */ React.createElement("div", { style: S.done }, "\u2726 Day ", state.currentDay, " complete"), /* @__PURE__ */ React.createElement("button", { className: "sb", onClick: handleNewDay, style: { ...S.submit, background: "rgba(126,184,164,0.2)", color: "#7EB8A4", boxShadow: "none" } }, "Start Day ", (state.currentDay || 1) + 1, " \u2192"))), view === "myboons" && /* @__PURE__ */ React.createElement("div", { style: S.content }, state.boons.length === 0 ? /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center", padding: "48px 24px", color: "#6a6050" } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, marginBottom: 8, color: "#1a1814" } }, "No boons yet"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12 } }, "Complete daily check-ins to earn your first boon.")) : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { style: { padding: "16px 2px 10px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 20, color: "#3D5A8A" } }, "\u2726 Earned Boons"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#b0a080" } }, state.boons.length, " of ", BOONS.length)), [...PILLARS, { id: "synergy", name: "Synergy", icon: "\u2726", color: "#3D5A8A" }].map((p) => {
+  }), !submitted ? /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, /* @__PURE__ */ React.createElement("button", { className: "sb", onClick: handleSave, style: __spreadProps(__spreadValues({}, S.submit), { background: "rgba(61,90,138,0.15)", color: "#3D5A8A", boxShadow: "none" }) }, "Save Progress"), /* @__PURE__ */ React.createElement("button", { className: "sb", onClick: () => setShowEndDayConfirm(true), style: S.submit }, "End Day \u2726")) : /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, /* @__PURE__ */ React.createElement("div", { style: S.done }, "\u2726 Day ", state.currentDay, " complete"), /* @__PURE__ */ React.createElement("button", { className: "sb", onClick: handleNewDay, style: __spreadProps(__spreadValues({}, S.submit), { background: "rgba(126,184,164,0.2)", color: "#7EB8A4", boxShadow: "none" }) }, "Start Day ", (state.currentDay || 1) + 1, " \u2192"))), view === "myboons" && /* @__PURE__ */ React.createElement("div", { style: S.content }, state.boons.length === 0 ? /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center", padding: "48px 24px", color: "#6a6050" } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, marginBottom: 8, color: "#1a1814" } }, "No boons yet"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 12 } }, "Complete daily check-ins to earn your first boon.")) : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { style: { padding: "16px 2px 10px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 20, color: "#3D5A8A" } }, "\u2726 Earned Boons"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#b0a080" } }, state.boons.length, " of ", BOONS.length)), [...PILLARS, { id: "synergy", name: "Synergy", icon: "\u2726", color: "#3D5A8A" }].map((p) => {
     var _a2;
     const earned = BOONS.filter((b) => b.pillar === p.id && state.boons.includes(b.id));
     if (!earned.length) return null;
     const col = ((_a2 = pillarMap[p.id]) == null ? void 0 : _a2.color) || "#3D5A8A";
-    return /* @__PURE__ */ React.createElement("div", { key: p.id, style: { marginBottom: 22 } }, /* @__PURE__ */ React.createElement("div", { style: { ...S.boonPHead, color: col } }, p.icon, " ", p.name), /* @__PURE__ */ React.createElement("div", { style: S.boonGrid }, earned.map((boon) => {
+    return /* @__PURE__ */ React.createElement("div", { key: p.id, style: { marginBottom: 22 } }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonPHead), { color: col }) }, p.icon, " ", p.name), /* @__PURE__ */ React.createElement("div", { style: S.boonGrid }, earned.map((boon) => {
       var _a3;
-      const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow } = getBoonStatus(boon, state.checkins, state.boons, streaks);
+      const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow, graceActive } = getBoonStatus(boon, state.checkins, state.boons, streaks, state);
       const bCol = ((_a3 = pillarMap[boon.pillar]) == null ? void 0 : _a3.color) || "#3D5A8A";
-      return /* @__PURE__ */ React.createElement("div", { key: boon.id, style: {
-        ...S.boonCard,
+      return /* @__PURE__ */ React.createElement("div", { key: boon.id, style: __spreadProps(__spreadValues({}, S.boonCard), {
         borderColor: dormant ? "#252520" : bCol,
         background: dormant ? "#F7F5F0" : `linear-gradient(135deg,rgba(${hexToRgb(bCol)},0.1) 0%,#fff 70%)`,
         opacity: dormant ? 0.5 : 1
-      } }, /* @__PURE__ */ React.createElement("div", { style: S.boonTop }, /* @__PURE__ */ React.createElement("div", { style: { ...S.boonNode, background: dormant ? "#E8E4DC" : bCol, borderColor: dormant ? "#E0DAD0" : bCol, color: dormant ? "#aaa" : "#fff" } }, dormant ? "\u25CB" : "\u2726"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { ...S.boonName, color: dormant ? "#aaa" : "#1a1814" } }, boon.name), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, marginTop: 2, color: dormant ? "#444" : bCol } }, dormant ? "Dormant" : "Active", " \xB7 Tier ", boon.tier)), /* @__PURE__ */ React.createElement(
+      }) }, /* @__PURE__ */ React.createElement("div", { style: S.boonTop }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonNode), { background: dormant ? "#E8E4DC" : bCol, borderColor: dormant ? "#E0DAD0" : bCol, color: dormant ? "#aaa" : "#fff" }) }, dormant ? "\u25CB" : "\u2726"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonName), { color: dormant ? "#aaa" : "#1a1814" }) }, boon.name), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, marginTop: 2, color: dormant ? "#444" : bCol } }, dormant ? "Dormant" : graceActive ? "Active \xB7 Grace Period" : "Active", " \xB7 Tier ", boon.tier)), /* @__PURE__ */ React.createElement(
         "button",
         {
           className: "ib",
           onClick: () => setInsightItem(boon),
-          style: { ...S.insightBtn, borderColor: dormant ? "#E0DAD0" : bCol, color: dormant ? "#b0a080" : bCol }
+          style: __spreadProps(__spreadValues({}, S.insightBtn), { borderColor: dormant ? "#E0DAD0" : bCol, color: dormant ? "#b0a080" : bCol })
         },
         "Insight"
-      )), /* @__PURE__ */ React.createElement("div", { style: { ...S.boonDesc, color: dormant ? "#c0b8a8" : "#6a6050" } }, boon.desc), dormant && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 8 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 10, color: "#b0a080", marginBottom: 3 } }, /* @__PURE__ */ React.createElement("span", null, "Rebuild within ", rebuildWindow, " days"), /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 600, color: rebuildCount > 0 ? "#3D5A8A" : "#b0a080" } }, rebuildCount, " / ", rebuildNeeded)), /* @__PURE__ */ React.createElement("div", { style: { height: 5, background: "#ECEEF8", borderRadius: 4, overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { height: "100%", width: `${Math.min(100, rebuildCount / rebuildNeeded * 100)}%`, background: "#3D5A8A", borderRadius: 4, transition: "width 0.4s ease" } }))));
+      )), /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonDesc), { color: dormant ? "#c0b8a8" : "#6a6050" }) }, boon.desc), graceActive && !dormant && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 8, fontSize: 10, color: "#b0a080", fontStyle: "italic" } }, "Building consistency \u2014 ", rebuildCount, " / ", rebuildNeeded, " completions so far"), dormant && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 8 } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 10, color: "#b0a080", marginBottom: 3 } }, /* @__PURE__ */ React.createElement("span", null, "Rebuild within ", rebuildWindow, " days"), /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 600, color: rebuildCount > 0 ? "#3D5A8A" : "#b0a080" } }, rebuildCount, " / ", rebuildNeeded)), /* @__PURE__ */ React.createElement("div", { style: { height: 5, background: "#ECEEF8", borderRadius: 4, overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { height: "100%", width: `${Math.min(100, rebuildCount / rebuildNeeded * 100)}%`, background: "#3D5A8A", borderRadius: 4, transition: "width 0.4s ease" } }))));
     })));
   }))), view === "achievements" && /* @__PURE__ */ React.createElement("div", { style: S.content }, /* @__PURE__ */ React.createElement("div", { style: { padding: "16px 2px 10px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ React.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 20, color: "#7EB8A4", fontWeight: 500 } }, "\u2295 Achievements"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#555" } }, activeAchCount, " active")), (() => {
     const anyEarned = ACHIEVEMENTS.some((a) => {
@@ -4403,7 +4445,7 @@ function App() {
     });
     if (!pillarAchs.length) return null;
     const col = ((_a2 = pillarMap[p.id]) == null ? void 0 : _a2.color) || "#3D5A8A";
-    return /* @__PURE__ */ React.createElement("div", { key: p.id, style: { marginBottom: 24 } }, /* @__PURE__ */ React.createElement("div", { style: { ...S.boonPHead, color: col } }, p.icon, " ", p.name), /* @__PURE__ */ React.createElement("div", { style: S.boonGrid }, pillarAchs.map((ach2) => {
+    return /* @__PURE__ */ React.createElement("div", { key: p.id, style: { marginBottom: 24 } }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonPHead), { color: col }) }, p.icon, " ", p.name), /* @__PURE__ */ React.createElement("div", { style: S.boonGrid }, pillarAchs.map((ach2) => {
       var _a3, _b2;
       const achStatus = getAchievementStatus(ach2, state.checkins, state.achievements || {}, state.currentDay || 1);
       const earnedDay = parseInt((((_a3 = (state.achievements || {})[ach2.id]) == null ? void 0 : _a3.date) || "day_0").replace("day_", "")) || 0;
@@ -4425,45 +4467,40 @@ function App() {
         {
           key: ach2.id,
           className: isNew ? "achNew bc" : "bc",
-          style: {
-            ...S.boonCard,
+          style: __spreadProps(__spreadValues({}, S.boonCard), {
             borderColor: cardBorder,
             borderWidth: isActive ? "1.5px" : "1px",
             background: cardBg,
             opacity: isLocked ? 0.6 : 1,
             boxShadow: isActive && isFeatTrophy ? `0 4px 20px rgba(192,160,96,0.2)` : isActive ? `0 4px 16px rgba(126,184,164,0.12)` : "none"
-          }
+          })
         },
-        /* @__PURE__ */ React.createElement("div", { style: S.boonTop }, /* @__PURE__ */ React.createElement("div", { style: {
-          ...S.boonNode,
+        /* @__PURE__ */ React.createElement("div", { style: S.boonTop }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonNode), {
           fontSize: isFeatTrophy ? 22 : 16,
           background: isFeatTrophy ? "rgba(212,168,64,0.12)" : "rgba(126,184,164,0.1)",
           borderColor: activeColor,
           color: activeColor,
           minWidth: 38,
           height: 38
-        } }, ach2.icon), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: {
-          ...S.boonName,
+        }) }, ach2.icon), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonName), {
           color: isFeatTrophy ? trophyColor : "#ffffff",
           fontWeight: 700
-        } }, ach2.name), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, marginTop: 2, display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" } }, isActive && /* @__PURE__ */ React.createElement("span", { style: { color: activeColor, fontWeight: 500 } }, ((_b2 = (state.achievements || {})[ach2.id]) == null ? void 0 : _b2.count) > 1 ? `Earned ${(state.achievements || {})[ach2.id].count} times` : "Earned \u2726"), isFeatTrophy && featCount > 0 && /* @__PURE__ */ React.createElement("span", { style: { color: trophyColor, fontWeight: 600, fontSize: 10 } }, "Best: ", featCount, "\xD7"))), achStatus !== "locked" && /* @__PURE__ */ React.createElement(
+        }) }, ach2.name), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, marginTop: 2, display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" } }, isActive && /* @__PURE__ */ React.createElement("span", { style: { color: activeColor, fontWeight: 500 } }, ((_b2 = (state.achievements || {})[ach2.id]) == null ? void 0 : _b2.count) > 1 ? `Earned ${(state.achievements || {})[ach2.id].count} times` : "Earned \u2726"), isFeatTrophy && featCount > 0 && /* @__PURE__ */ React.createElement("span", { style: { color: trophyColor, fontWeight: 600, fontSize: 10 } }, "Best: ", featCount, "\xD7"))), achStatus !== "locked" && /* @__PURE__ */ React.createElement(
           "button",
           {
             className: "ib",
             onClick: () => setInsightItem(ach2),
-            style: {
-              ...S.insightBtn,
+            style: __spreadProps(__spreadValues({}, S.insightBtn), {
               borderColor: isActive ? activeColor : "#3a3830",
               color: isActive ? activeColor : "#888"
-            }
+            })
           },
           "Insight"
         )),
-        /* @__PURE__ */ React.createElement("div", { style: {
-          ...S.boonDesc,
+        /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonDesc), {
           color: "#c8c4b8",
           marginTop: 8
-        } }, ach2.desc)
+        }) }, ach2.desc)
       );
     })));
   })), view === "boons" && /* @__PURE__ */ React.createElement("div", { style: S.content }, /* @__PURE__ */ React.createElement("div", { style: S.filterRow }, [{ key: "all", label: "All" }, { key: "unlocked", label: `Unlocked (${unlockedBoonCount})` }, { key: "available", label: "Available" }, { key: "synergy", label: "\u2726 Synergy" }].map((f) => /* @__PURE__ */ React.createElement(
@@ -4472,12 +4509,11 @@ function App() {
       key: f.key,
       className: "fb",
       onClick: () => setBoonFilter(f.key),
-      style: {
-        ...S.filterBtn,
+      style: __spreadProps(__spreadValues({}, S.filterBtn), {
         background: boonFilter === f.key ? "rgba(61,90,138,0.18)" : "transparent",
         color: boonFilter === f.key ? "#3D5A8A" : "#555",
         borderColor: boonFilter === f.key ? "#3D5A8A" : "#222219"
-      }
+      })
     },
     f.label
   ))), closeSynergyBoons.length > 0 && /* @__PURE__ */ React.createElement("div", { style: {
@@ -4489,35 +4525,33 @@ function App() {
   } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#C4973A", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600, marginBottom: 8 } }, "\u2726 Cross Boon Within Reach"), closeSynergyBoons.map(({ boon, missingBoon }) => /* @__PURE__ */ React.createElement("div", { key: boon.id, style: { display: "flex", alignItems: "flex-start", gap: 10, marginBottom: closeSynergyBoons.length > 1 ? 8 : 0 } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 14, fontWeight: 700, color: "#C4973A", fontFamily: "'Cormorant Garamond',serif" } }, boon.name), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 11, color: "#6a6050", marginTop: 2 } }, "Earn ", /* @__PURE__ */ React.createElement("span", { style: { fontWeight: 600, color: "#1a1814" } }, (missingBoon == null ? void 0 : missingBoon.name) || "one more boon"), missingBoon && /* @__PURE__ */ React.createElement("span", { style: { color: "#b0a080" } }, " (", missingBoon.pillar, ")"), " to unlock")), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 18, flexShrink: 0 } }, "\u2726")))), [...PILLARS, { id: "synergy", name: "Synergy", icon: "\u2726", color: "#3D5A8A" }].map((p) => {
     const pb = filteredBoons.filter((b) => b.pillar === p.id);
     if (!pb.length) return null;
-    return /* @__PURE__ */ React.createElement("div", { key: p.id, style: { marginBottom: 28 } }, /* @__PURE__ */ React.createElement("div", { style: { ...S.boonPHead, color: p.color || "#3D5A8A" } }, p.icon, " ", p.name), /* @__PURE__ */ React.createElement("div", { style: S.boonGrid }, pb.map((boon) => {
+    return /* @__PURE__ */ React.createElement("div", { key: p.id, style: { marginBottom: 28 } }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonPHead), { color: p.color || "#3D5A8A" }) }, p.icon, " ", p.name), /* @__PURE__ */ React.createElement("div", { style: S.boonGrid }, pb.map((boon) => {
       var _a2, _b2;
       const unlocked = state.boons.includes(boon.id);
-      const available = !unlocked && boon.condition({ ...state, streaks });
-      const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow } = getBoonStatus(boon, state.checkins, state.boons, streaks);
+      const available = !unlocked && boon.condition(__spreadProps(__spreadValues({}, state), { streaks }));
+      const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow } = getBoonStatus(boon, state.checkins, state.boons, streaks, state);
       const col = ((_a2 = pillarMap[boon.pillar]) == null ? void 0 : _a2.color) || "#3D5A8A";
       return /* @__PURE__ */ React.createElement(
         "div",
         {
           key: boon.id,
           className: `bc${newlyUnlocked.includes(boon.id) ? " neu" : ""}`,
-          style: {
-            ...S.boonCard,
+          style: __spreadProps(__spreadValues({}, S.boonCard), {
             borderColor: unlocked ? dormant ? "#E0DAD0" : col : available ? "#6A82B4" : "#E8E4DC",
             background: unlocked ? dormant ? "#F7F5F0" : `linear-gradient(135deg,rgba(${hexToRgb(col)},0.12) 0%,#fff 70%)` : "#fff",
             opacity: dormant ? 0.5 : 1
-          }
+          })
         },
-        /* @__PURE__ */ React.createElement("div", { style: S.boonTop }, /* @__PURE__ */ React.createElement("div", { style: {
-          ...S.boonNode,
+        /* @__PURE__ */ React.createElement("div", { style: S.boonTop }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonNode), {
           background: unlocked ? dormant ? "#E8E4DC" : col : available ? "#EEF0F8" : "#ECEEF8",
           borderColor: unlocked ? dormant ? "#E0DAD0" : col : available ? "#6A82B4" : "#E0DAD0",
           color: unlocked ? dormant ? "#aaa" : "#fff" : "#3D5A8A"
-        } }, unlocked ? dormant ? "\u25CB" : "\u2726" : boon.tier), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: { ...S.boonName, color: unlocked ? dormant ? "#aaa" : "#1a1814" : available ? "#8a6030" : "#c0b8a8" } }, boon.name), /* @__PURE__ */ React.createElement("div", { style: S.boonStatus }, unlocked ? dormant ? /* @__PURE__ */ React.createElement("span", { style: { color: "#b0a080" } }, "Dormant") : /* @__PURE__ */ React.createElement("span", { style: { color: col, fontWeight: 500 } }, "Active") : available ? /* @__PURE__ */ React.createElement("span", { style: { color: "#3D5A8A" } }, "Ready") : /* @__PURE__ */ React.createElement("span", { style: { color: "#c0b8a8" } }, "Locked"))), (unlocked || available) && /* @__PURE__ */ React.createElement(
+        }) }, unlocked ? dormant ? "\u25CB" : "\u2726" : boon.tier), /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonName), { color: unlocked ? dormant ? "#aaa" : "#1a1814" : available ? "#8a6030" : "#c0b8a8" }) }, boon.name), /* @__PURE__ */ React.createElement("div", { style: S.boonStatus }, unlocked ? dormant ? /* @__PURE__ */ React.createElement("span", { style: { color: "#b0a080" } }, "Dormant") : /* @__PURE__ */ React.createElement("span", { style: { color: col, fontWeight: 500 } }, "Active") : available ? /* @__PURE__ */ React.createElement("span", { style: { color: "#3D5A8A" } }, "Ready") : /* @__PURE__ */ React.createElement("span", { style: { color: "#c0b8a8" } }, "Locked"))), (unlocked || available) && /* @__PURE__ */ React.createElement(
           "button",
           {
             className: "ib",
             onClick: () => setInsightItem(boon),
-            style: { ...S.insightBtn, borderColor: unlocked ? dormant ? "#252520" : col : "rgba(61,90,138,0.3)", color: unlocked ? dormant ? "#b0a080" : col : "#3D5A8A" }
+            style: __spreadProps(__spreadValues({}, S.insightBtn), { borderColor: unlocked ? dormant ? "#252520" : col : "rgba(61,90,138,0.3)", color: unlocked ? dormant ? "#b0a080" : col : "#3D5A8A" })
           },
           unlocked ? "Insight" : "Preview"
         )),
@@ -4639,7 +4673,7 @@ function App() {
       return /* @__PURE__ */ React.createElement("div", { key: c.id }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 5 } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: 13, color: "#1a1814" } }, c.label), /* @__PURE__ */ React.createElement("span", { style: { fontSize: 13, fontWeight: 700, color: col } }, count, "\xD7")), /* @__PURE__ */ React.createElement("div", { style: { height: 7, background: "#ECEEF8", borderRadius: 4, overflow: "hidden" } }, /* @__PURE__ */ React.createElement("div", { style: { height: "100%", width: `${pct}%`, background: col, borderRadius: 4, transition: "width 0.5s ease" } })), /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#c0b8a8", marginTop: 3 } }, count >= goal ? /* @__PURE__ */ React.createElement("span", { style: { color: col, fontWeight: 600 } }, "Milestone reached!") : `${count} / ${goal} to next milestone`));
     })), earnedBoons.length > 0 && /* @__PURE__ */ React.createElement("div", { style: { marginTop: 14, paddingTop: 12, borderTop: "1px solid #ECEEF8" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 7 } }, "Boons earned"), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6 } }, earnedBoons.map((id) => {
       const b = BOONS.find((x) => x.id === id);
-      const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow } = getBoonStatus(b, state.checkins, state.boons, streaks);
+      const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow } = getBoonStatus(b, state.checkins, state.boons, streaks, state);
       return /* @__PURE__ */ React.createElement("span", { key: id, onClick: () => setInsightItem(b), style: {
         fontSize: 12,
         fontWeight: 500,
@@ -4718,7 +4752,7 @@ const S = {
   insightBtn: { background: "#F7F5F0", border: "none", borderRadius: 12, padding: "6px 12px", fontSize: 11, cursor: "pointer", fontFamily: "'Inter',sans-serif", flexShrink: 0, transition: "opacity 0.15s", color: "#6a6050", fontWeight: 500 }
 };
 
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root=ReactDOM.createRoot(document.getElementById('root'));
 root.render(React.createElement(App));
-</script></body></html>
+</script>
+</body></html>
