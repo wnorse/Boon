@@ -2,13 +2,15 @@
 <html lang="en"><head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
 <title>Boon</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet"/>
 <style>*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}body{background:#F7F5F0;font-family:Georgia,serif;}button{cursor:pointer;font-family:inherit;}input{font-family:inherit;}::-webkit-scrollbar{display:none;}</style>
 </head><body>
 <div id="root"></div>
 <script>
-window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<pre style="color:red;padding:20px;font-size:11px">'+m+'\n'+e?.stack+'</pre>';return true;};
+window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<pre style="color:red;padding:20px;font-size:11px">'+m+'\n'+(e?.stack||'')+'</pre>';return true;};
 </script>
 <script>
 (function() {
@@ -10443,21 +10445,21 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     if (todayDate && isWeekend(todayDate)) return Math.min(0.9, baseProb * 5);
     return baseProb * 0.5;
   }
-  function drawChecks(pillarId, dateKey, unlockedBoons, checkins, count = 4, state2 = {}) {
+  function drawChecks(pillarId, dateKey, unlockedBoons, checkins, count = 4, state = {}) {
     var _a, _b, _c;
     const stored = (_b = (_a = checkins[dateKey]) == null ? void 0 : _a.__drawn) == null ? void 0 : _b[pillarId];
-    if (stored) return stored.map((id) => getPool(pillarId, state2 == null ? void 0 : state2.bodyType, state2 == null ? void 0 : state2.soulLevel, { creativeProject: state2 == null ? void 0 : state2.creativeProject, learningSubject: state2 == null ? void 0 : state2.learningSubject }).find((c) => c.id === id)).filter(Boolean);
+    if (stored) return stored.map((id) => getPool(pillarId, state == null ? void 0 : state.bodyType, state == null ? void 0 : state.soulLevel, { creativeProject: state == null ? void 0 : state.creativeProject, learningSubject: state == null ? void 0 : state.learningSubject }).find((c) => c.id === id)).filter(Boolean);
     const dayNumber = parseInt(dateKey.replace("day_", "")) || 1;
     const maxTier = getUnlockedTier(pillarId, unlockedBoons);
-    const drawCount = getDrawCount(pillarId, state2.pillarT1Unlocked, unlockedBoons);
+    const drawCount = getDrawCount(pillarId, state.pillarT1Unlocked, unlockedBoons);
     const seed = dateKey.split("").reduce((a, c) => a + c.charCodeAt(0), 0) + pillarId.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
     const rand = seededRand(seed);
-    const t1Pool = getPool(pillarId, state2 == null ? void 0 : state2.bodyType, state2 == null ? void 0 : state2.soulLevel, { creativeProject: state2 == null ? void 0 : state2.creativeProject, learningSubject: state2 == null ? void 0 : state2.learningSubject }).filter((c) => c.tier === 1 && !c.feat);
-    const t23Pool = getPool(pillarId, state2 == null ? void 0 : state2.bodyType, state2 == null ? void 0 : state2.soulLevel, { creativeProject: state2 == null ? void 0 : state2.creativeProject, learningSubject: state2 == null ? void 0 : state2.learningSubject }).filter((c) => !c.feat && c.tier > 1 && c.tier <= maxTier);
-    const featPool = getPool(pillarId, state2 == null ? void 0 : state2.bodyType, state2 == null ? void 0 : state2.soulLevel, { creativeProject: state2 == null ? void 0 : state2.creativeProject, learningSubject: state2 == null ? void 0 : state2.learningSubject }).filter((c) => {
+    const t1Pool = getPool(pillarId, state == null ? void 0 : state.bodyType, state == null ? void 0 : state.soulLevel, { creativeProject: state == null ? void 0 : state.creativeProject, learningSubject: state == null ? void 0 : state.learningSubject }).filter((c) => c.tier === 1 && !c.feat);
+    const t23Pool = getPool(pillarId, state == null ? void 0 : state.bodyType, state == null ? void 0 : state.soulLevel, { creativeProject: state == null ? void 0 : state.creativeProject, learningSubject: state == null ? void 0 : state.learningSubject }).filter((c) => !c.feat && c.tier > 1 && c.tier <= maxTier);
+    const featPool = getPool(pillarId, state == null ? void 0 : state.bodyType, state == null ? void 0 : state.soulLevel, { creativeProject: state == null ? void 0 : state.creativeProject, learningSubject: state == null ? void 0 : state.learningSubject }).filter((c) => {
       if (!c.feat) return false;
       if (maxTier < 3) return false;
-      return isFeatDrawable(c, pillarId, checkins, state2.lastFeatDrawn, dayNumber, state2.weekendMode, state2.calendarDates);
+      return isFeatDrawable(c, pillarId, checkins, state.lastFeatDrawn, dayNumber, state.weekendMode, state.calendarDates);
     });
     const shuffledT1 = [...t1Pool].sort(() => rand() - 0.5);
     const shuffledT23 = [...t23Pool].sort(() => rand() - 0.5);
@@ -10477,7 +10479,7 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
         result.push(shuffledT1[t1Used++]);
       }
     }
-    if (drawCount === 4 && shuffledFeat.length > 0 && rand() < getFeatProbability(state2.weekendMode, state2.calendarDates, dayNumber)) {
+    if (drawCount === 4 && shuffledFeat.length > 0 && rand() < getFeatProbability(state.weekendMode, state.calendarDates, dayNumber)) {
       result[result.length - 1] = shuffledFeat[0];
     }
     return result.slice(0, drawCount);
@@ -10546,16 +10548,16 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     }
     return streaks;
   }
-  function computeBoons(state2, debug = false) {
-    const nb = [...state2.boons];
+  function computeBoons(state, debug = false) {
+    const nb = [...state.boons];
     let changed = true;
     while (changed) {
       changed = false;
       for (const b of BOONS) {
         if (nb.includes(b.id)) continue;
-        if (b.pillar !== "synergy" && (state2.streaks[`${b.pillar}_active`] || 0) === 0) continue;
-        if (b.condition(__spreadProps(__spreadValues({}, state2), { boons: nb }))) {
-          if (debug) console.log(`BOON: ${b.id} | ${b.pillar}_active=${state2.streaks[`${b.pillar}_active`]} | streaks:`, Object.fromEntries(Object.entries(state2.streaks).filter(([k]) => k.startsWith(b.pillar))));
+        if (b.pillar !== "synergy" && (state.streaks[`${b.pillar}_active`] || 0) === 0) continue;
+        if (b.condition(__spreadProps(__spreadValues({}, state), { boons: nb }))) {
+          if (debug) console.log(`BOON: ${b.id} | ${b.pillar}_active=${state.streaks[`${b.pillar}_active`]} | streaks:`, Object.fromEntries(Object.entries(state.streaks).filter(([k]) => k.startsWith(b.pillar))));
           nb.push(b.id);
           changed = true;
         }
@@ -10568,13 +10570,13 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     if (!earned) return "locked";
     return "active";
   }
-  function checkCrossPillarAchievements(checkins, boons, earnedAchievements, todayKey) {
+  function checkCrossPillarAchievements(checkins, boons, earnedAchievements, todayKey, appState = {}) {
     const today = todayKey;
     const newEarned = __spreadValues({}, earnedAchievements);
     const newlyEarned = [];
     const todayData = checkins[today] || {};
     const allPillarsDone = PILLARS.every((p) => {
-      const drawn = drawChecks(p.id, today, boons, checkins, 4, state);
+      const drawn = drawChecks(p.id, today, boons, checkins, 4, appState);
       return drawn.some((c) => todayData[`${p.id}_${c.id}`]);
     });
     if (allPillarsDone && !newEarned["whole_man"]) {
@@ -10587,8 +10589,8 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     }
     return { newEarned, newlyEarned };
   }
-  function getBoonStatus(boon, checkins, boons, streaks, state2 = {}) {
-    var _a, _b;
+  function getBoonStatus(boon, checkins, boons, streaks, state = {}) {
+    var _a;
     const notEarned = !boons.includes(boon.id);
     if (boon.pillar === "synergy") {
       const permanentIds = ["integrated_man", "integrated_man_ii", "integrated_man_iii"];
@@ -10600,20 +10602,11 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     const threshold = boon.need || 3;
     const multiplier = DECAY_MULTIPLIER[boon.pillar] || 3;
     const window2 = threshold * multiplier;
-    const earnedDay = (state2.boonEarnedDay || {})[boon.id];
-    const currentDay = state2.currentDay || 1;
-    if (earnedDay !== void 0 && currentDay - earnedDay < window2) {
-      const graceDays = Object.keys(checkins).filter((k) => k.startsWith("day_")).sort((a, b) => parseInt(b.replace("day_", "")) - parseInt(a.replace("day_", ""))).slice(0, window2);
-      const gracePillarId = streakKey.split("_")[0];
-      const graceCheckId = streakKey.slice(gracePillarId.length + 1);
-      let graceCount = 0;
-      for (const dk of graceDays) {
-        const graceDay = checkins[dk];
-        if (!graceDay) continue;
-        const graceDrawnIds = ((_a = graceDay.__drawn) == null ? void 0 : _a[gracePillarId]) || [];
-        if (graceDrawnIds.includes(graceCheckId) && graceDay[`${gracePillarId}_${graceCheckId}`]) graceCount++;
-      }
-      return { dormant: false, count: graceCount, needed: threshold, window: window2, graceActive: true };
+    const earnedDay = (state.boonEarnedDay || {})[boon.id];
+    const currentDay = state.currentDay || 1;
+    const daysSinceEarn = earnedDay !== void 0 ? currentDay - earnedDay : 0;
+    if (daysSinceEarn < window2) {
+      return { dormant: false, count: threshold, needed: threshold, window: window2, graceActive: true };
     }
     const allDays = Object.keys(checkins).filter((k) => k.startsWith("day_")).sort((a, b) => parseInt(b.replace("day_", "")) - parseInt(a.replace("day_", ""))).slice(0, window2);
     const pillarId = streakKey.split("_")[0];
@@ -10622,8 +10615,9 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     for (const dk of allDays) {
       const day = checkins[dk];
       if (!day) continue;
-      const drawnIds = ((_b = day.__drawn) == null ? void 0 : _b[pillarId]) || [];
-      if (drawnIds.includes(checkId) && day[`${pillarId}_${checkId}`]) count++;
+      const drawnIds = ((_a = day.__drawn) == null ? void 0 : _a[pillarId]) || [];
+      const completed = day[`${pillarId}_${checkId}`];
+      if (completed && (drawnIds.length === 0 || drawnIds.includes(checkId))) count++;
     }
     const dormant = boons.includes(boon.id) && count < threshold;
     return { dormant, count, needed: threshold, window: window2 };
@@ -10699,14 +10693,14 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
       console.error("Storage save failed:", e);
     }
   }
-  function generateFakeHistory(days = 21, state2) {
+  function generateFakeHistory(days = 21, state) {
     const checkins = {};
     const startBoons = [];
     for (let i = days; i >= 1; i--) {
       const dk = `day_${i}`;
       checkins[dk] = { __drawn: {} };
       for (const p of PILLARS) {
-        const drawn = drawChecks(p.id, dk, startBoons, checkins, 4, state2);
+        const drawn = drawChecks(p.id, dk, startBoons, checkins, 4, state);
         checkins[dk].__drawn[p.id] = drawn.map((c) => c.id);
         drawn.forEach((c) => {
           if (Math.random() < 0.84) checkins[dk][`${p.id}_${c.id}`] = true;
@@ -10717,7 +10711,7 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
   }
   function App() {
     var _a, _b, _c, _d, _e;
-    const [state2, setState] = (0, import_react.useState)(initState);
+    const [state, setState] = (0, import_react.useState)(initState);
     const [view, setView] = (0, import_react.useState)("checkin");
     const [onboardStep, setOnboardStep] = (0, import_react.useState)(0);
     const [onboardData, setOnboardData] = (0, import_react.useState)({
@@ -10744,21 +10738,21 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     const closeSynergyBoons = (0, import_react.useMemo)(() => {
       return BOONS.filter((b) => {
         if (b.pillar !== "synergy") return false;
-        if (state2.boons.includes(b.id)) return false;
+        if (state.boons.includes(b.id)) return false;
         if (!b.condition) return false;
         const condStr = b.condition.toString();
         const needed = [...condStr.matchAll(/includes\("([^"]+)"\)/g)].map((m) => m[1]);
         if (needed.length === 0) return false;
-        const missing = needed.filter((id) => !state2.boons.includes(id));
+        const missing = needed.filter((id) => !state.boons.includes(id));
         return missing.length === 1;
       }).map((b) => {
         const condStr = b.condition.toString();
         const needed = [...condStr.matchAll(/includes\("([^"]+)"\)/g)].map((m) => m[1]);
-        const missing = needed.filter((id) => !state2.boons.includes(id));
+        const missing = needed.filter((id) => !state.boons.includes(id));
         const missingBoon = BOONS.find((x) => x.id === missing[0]);
         return { boon: b, missingBoon };
       });
-    }, [state2.boons]);
+    }, [state.boons]);
     const [devOpen, setDevOpen] = (0, import_react.useState)(false);
     const [devDays, setDevDays] = (0, import_react.useState)(21);
     const [devPillars, setDevPillars] = (0, import_react.useState)(["body", "mind", "soul", "husband", "father"]);
@@ -10784,7 +10778,7 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
       const id = setInterval(() => setTickerIndex((i) => i + 1), 12e3);
       return () => clearInterval(id);
     }, []);
-    const todayKey = getTodayKey(state2.currentDay);
+    const todayKey = getTodayKey(state.currentDay);
     const [loaded, setLoaded] = (0, import_react.useState)(false);
     (0, import_react.useEffect)(() => {
       loadFromStorage().then((saved) => {
@@ -11002,7 +10996,7 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
           }
         }
       }
-      const { newEarned, newlyEarned } = checkCrossPillarAchievements(nc, currentState.boons, newAch, todayKey);
+      const { newEarned, newlyEarned } = checkCrossPillarAchievements(nc, currentState.boons, newAch, todayKey, currentState);
       newlyEarned.forEach((id) => {
         if (!newlyAch.includes(id)) newlyAch.push(id);
       });
@@ -11102,17 +11096,17 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     function handleSave() {
       const drawnToday = {};
       for (const p of PILLARS) {
-        const drawn = drawChecks(p.id, todayKey, state2.boons, state2.checkins, 4, state2);
+        const drawn = drawChecks(p.id, todayKey, state.boons, state.checkins, 4, state);
         drawnToday[p.id] = drawn.map((c) => c.id);
       }
-      const newCalendarDates = __spreadValues({}, state2.calendarDates || {});
+      const newCalendarDates = __spreadValues({}, state.calendarDates || {});
       if (!newCalendarDates[todayKey]) newCalendarDates[todayKey] = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
       const todayData = __spreadProps(__spreadValues({}, todayChecks), { __drawn: drawnToday });
-      const nc = __spreadProps(__spreadValues({}, state2.checkins), { [todayKey]: todayData });
-      update(__spreadProps(__spreadValues({}, state2), { checkins: nc, calendarDates: newCalendarDates }));
+      const nc = __spreadProps(__spreadValues({}, state.checkins), { [todayKey]: todayData });
+      update(__spreadProps(__spreadValues({}, state), { checkins: nc, calendarDates: newCalendarDates }));
     }
     function handleEndDay() {
-      processSubmit(todayChecks, state2);
+      processSubmit(todayChecks, state);
     }
     const [showDayStart, setShowDayStart] = (0, import_react.useState)(false);
     const [showEndDayConfirm, setShowEndDayConfirm] = (0, import_react.useState)(false);
@@ -11121,16 +11115,16 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     const [modalBoons, setModalBoons] = (0, import_react.useState)([]);
     const [hardcoreBlocked, setHardcoreBlocked] = (0, import_react.useState)(false);
     function handleNewDay() {
-      const nextDay = (state2.currentDay || 1) + 1;
+      const nextDay = (state.currentDay || 1) + 1;
       const todayDate = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
-      if (state2.hardcoreMode) {
-        const lastDate = state2.hardcoreLastDate;
+      if (state.hardcoreMode) {
+        const lastDate = state.hardcoreLastDate;
         if (lastDate === todayDate) {
           setHardcoreBlocked(true);
           return;
         }
-        let newHardcoreStreak = (state2.hardcoreStreak || 0) + 1;
-        let newHardcoreDays = (state2.hardcoreDays || 0) + 1;
+        let newHardcoreStreak = (state.hardcoreStreak || 0) + 1;
+        let newHardcoreDays = (state.hardcoreDays || 0) + 1;
         if (lastDate) {
           const last = new Date(lastDate);
           const today = new Date(todayDate);
@@ -11139,7 +11133,7 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
             newHardcoreStreak = 1;
           }
         }
-        update(__spreadProps(__spreadValues({}, state2), {
+        update(__spreadProps(__spreadValues({}, state), {
           currentDay: nextDay,
           dayEnded: false,
           lastCheckin: null,
@@ -11148,7 +11142,7 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
           hardcoreDays: newHardcoreDays
         }));
       } else {
-        update(__spreadProps(__spreadValues({}, state2), { currentDay: nextDay, dayEnded: false, lastCheckin: null }));
+        update(__spreadProps(__spreadValues({}, state), { currentDay: nextDay, dayEnded: false, lastCheckin: null }));
       }
       setTodayChecks({});
       setSubmitted(false);
@@ -11160,24 +11154,24 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
       handleEndDay();
     }
     function devSimulate() {
-      const ci = generateFakeHistory(devDays, state2);
-      const ns = computeStreaks(ci, state2.boons, state2.currentDay || 1);
-      const draft = __spreadProps(__spreadValues({}, state2), { checkins: ci, streaks: ns });
+      const ci = generateFakeHistory(devDays, state);
+      const ns = computeStreaks(ci, state.boons, state.currentDay || 1);
+      const draft = __spreadProps(__spreadValues({}, state), { checkins: ci, streaks: ns });
       const nb = computeBoons(draft);
       update(__spreadProps(__spreadValues({}, draft), { boons: nb, lastCheckin: null }));
       setSubmitted(false);
       setTodayChecks({});
     }
     function devOneDay() {
-      const ci = __spreadValues({}, state2.checkins);
-      const currentDay = state2.currentDay || 1;
+      const ci = __spreadValues({}, state.checkins);
+      const currentDay = state.currentDay || 1;
       let target = currentDay - 1;
       while (target >= 1 && ci[`day_${target}`]) target--;
       if (target >= 1) {
         const dk = `day_${target}`;
         ci[dk] = { __drawn: {} };
         for (const p of PILLARS) {
-          const drawn = drawChecks(p.id, dk, state2.boons, ci, 4, state2);
+          const drawn = drawChecks(p.id, dk, state.boons, ci, 4, state);
           ci[dk].__drawn[p.id] = drawn.map((c) => c.id);
           if (devPillars.includes(p.id)) {
             drawn.forEach((c) => {
@@ -11186,10 +11180,10 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
           }
         }
       }
-      const ns = computeStreaks(ci, state2.boons, state2.currentDay || 1);
-      const draft = __spreadProps(__spreadValues({}, state2), { checkins: ci, streaks: ns });
+      const ns = computeStreaks(ci, state.boons, state.currentDay || 1);
+      const draft = __spreadProps(__spreadValues({}, state), { checkins: ci, streaks: ns });
       const nb = computeBoons(draft, true);
-      const unlocked = nb.filter((b) => !state2.boons.includes(b));
+      const unlocked = nb.filter((b) => !state.boons.includes(b));
       update(__spreadProps(__spreadValues({}, draft), { boons: nb, lastCheckin: null }));
       setSubmitted(false);
       setTodayChecks({});
@@ -11199,21 +11193,21 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
       }
     }
     function devSetStreaks(n) {
-      const ci = __spreadValues({}, state2.checkins);
-      const currentDay = state2.currentDay || 1;
+      const ci = __spreadValues({}, state.checkins);
+      const currentDay = state.currentDay || 1;
       for (let i = 0; i < n; i++) {
         const dk = `day_${Math.max(1, currentDay - i)}`;
         ci[dk] = { __drawn: {} };
         for (const p of PILLARS) {
-          const drawn = drawChecks(p.id, dk, state2.boons, ci, 4, state2);
+          const drawn = drawChecks(p.id, dk, state.boons, ci, 4, state);
           ci[dk].__drawn[p.id] = drawn.map((c) => c.id);
           drawn.forEach((c) => {
             ci[dk][`${p.id}_${c.id}`] = true;
           });
         }
       }
-      const ns = computeStreaks(ci, state2.boons, state2.currentDay || 1);
-      const draft = __spreadProps(__spreadValues({}, state2), { checkins: ci, streaks: ns });
+      const ns = computeStreaks(ci, state.boons, state.currentDay || 1);
+      const draft = __spreadProps(__spreadValues({}, state), { checkins: ci, streaks: ns });
       const nb = computeBoons(draft);
       update(__spreadProps(__spreadValues({}, draft), { boons: nb, lastCheckin: null }));
       setSubmitted(false);
@@ -11222,9 +11216,9 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     function devUnlockAll() {
       const allAch = {};
       ACHIEVEMENTS.forEach((a) => {
-        allAch[a.id] = { date: `day_${state2.currentDay || 1}` };
+        allAch[a.id] = { date: `day_${state.currentDay || 1}` };
       });
-      update(__spreadProps(__spreadValues({}, state2), { boons: BOONS.map((b) => b.id), achievements: allAch }));
+      update(__spreadProps(__spreadValues({}, state), { boons: BOONS.map((b) => b.id), achievements: allAch }));
     }
     function devReset() {
       const f = { checkins: {}, streaks: {}, boons: [], achievements: {}, lastCheckin: null, debugStreaks: null, currentDay: 1, dayEnded: false };
@@ -11235,33 +11229,33 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
       setNewlyEarnedAch([]);
       setInsightItem(null);
     }
-    const streaks = state2.debugStreaks || computeStreaks(state2.checkins, state2.boons, state2.currentDay || 1);
-    const unlockedBoonCount = state2.boons.length;
-    const activeAchCount = Object.keys(state2.achievements || {}).length;
-    const totalDays = state2.currentDay || 1;
-    const totalScore = state2.totalScore || 0;
+    const streaks = state.debugStreaks || computeStreaks(state.checkins, state.boons, state.currentDay || 1);
+    const unlockedBoonCount = state.boons.length;
+    const activeAchCount = Object.keys(state.achievements || {}).length;
+    const totalDays = state.currentDay || 1;
+    const totalScore = state.totalScore || 0;
     const pillarMap = Object.fromEntries(PILLARS.map((p) => [p.id, p]));
-    const hiddenPillars = state2.hiddenPillars || [];
-    const showHusband = state2.isMarried || state2.hasPartner;
-    const showFather = state2.hasChildren;
+    const hiddenPillars = state.hiddenPillars || [];
+    const showHusband = state.isMarried || state.hasPartner;
+    const showFather = state.hasChildren;
     const derivedHidden = [
-      ...!showHusband && state2.isMarried !== null ? ["husband"] : [],
-      ...!showFather && state2.hasChildren !== null ? ["father"] : []
+      ...!showHusband && state.isMarried !== null ? ["husband"] : [],
+      ...!showFather && state.hasChildren !== null ? ["father"] : []
     ];
     const allHidden = [.../* @__PURE__ */ new Set([...hiddenPillars, ...derivedHidden])];
     const visiblePillars = PILLARS.filter((p) => !allHidden.includes(p.id)).map((p) => {
-      if (p.id === "husband" && !state2.isMarried && state2.hasPartner)
+      if (p.id === "husband" && !state.isMarried && state.hasPartner)
         return __spreadProps(__spreadValues({}, p), { name: "Partner", desc: "Intentional love for your partner" });
       return p;
     });
     const filteredBoons = BOONS.filter((b) => {
       if (boonFilter === "all") return true;
-      if (boonFilter === "unlocked") return state2.boons.includes(b.id);
-      if (boonFilter === "available") return !state2.boons.includes(b.id) && b.condition(__spreadProps(__spreadValues({}, state2), { streaks }));
+      if (boonFilter === "unlocked") return state.boons.includes(b.id);
+      if (boonFilter === "available") return !state.boons.includes(b.id) && b.condition(__spreadProps(__spreadValues({}, state), { streaks }));
       if (boonFilter === "synergy") return b.pillar === "synergy";
       return b.pillar === boonFilter;
     });
-    const ach = state2.achievements || {};
+    const ach = state.achievements || {};
     const LOADING_QUOTES = [
       { text: "Do not be surprised that you fall every day. Do not give up. Stand your ground bravely. And assuredly the angel who guards you will honor your patience.", author: "St. John Climacus, The Ladder of Divine Ascent" },
       { text: "We are what we repeatedly do. Excellence, then, is not an act but a habit.", author: "Aristotle, Nicomachean Ethics" },
@@ -11309,7 +11303,7 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
         const q = LOADING_QUOTES[Math.floor(Math.random() * LOADING_QUOTES.length)];
         setLoadingItem(__spreadValues({ type: "quote" }, q));
       } else {
-        const locked = BOONS.filter((b) => !state2.boons.includes(b.id) && b.pillar !== "synergy" && b.insight);
+        const locked = BOONS.filter((b) => !state.boons.includes(b.id) && b.pillar !== "synergy" && b.insight);
         if (locked.length > 0) {
           const b = locked[Math.floor(Math.random() * locked.length)];
           setLoadingItem({ type: "boon", boon: b });
@@ -11333,12 +11327,12 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
       const d = onboardData;
       const showHusband2 = d.isMarried || d.hasPartner;
       const showFather2 = d.hasChildren;
-      const todayKey2 = `day_${state2.currentDay || 1}`;
-      const cleanCheckins = __spreadValues({}, state2.checkins);
+      const todayKey2 = `day_${state.currentDay || 1}`;
+      const cleanCheckins = __spreadValues({}, state.checkins);
       if (cleanCheckins[todayKey2]) {
         cleanCheckins[todayKey2] = { __drawn: cleanCheckins[todayKey2].__drawn };
       }
-      update(__spreadProps(__spreadValues({}, state2), {
+      update(__spreadProps(__spreadValues({}, state), {
         checkins: cleanCheckins,
         dayEnded: false,
         onboardingComplete: true,
@@ -11755,7 +11749,7 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
         } }, "\u2726 Enter Boon"));
       }
     ];
-    if (!state2.onboardingComplete) {
+    if (!state.onboardingComplete) {
       const totalSteps = ONBOARD_STEPS.length;
       return /* @__PURE__ */ import_react.default.createElement("div", { style: {
         maxWidth: 480,
@@ -11876,9 +11870,9 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
           animation:redSweep 4.5s ease-in-out infinite;}
         .achNew{animation:achGlow 1.8s ease-in-out 2;}
         .slide{animation:slideUp 0.35s ease;}
-      `), showDayStart && /* @__PURE__ */ import_react.default.createElement("div", { style: S.overlay, onClick: () => setShowDayStart(false) }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.modal), { maxHeight: "80vh", overflowY: "auto" }), onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 26, fontWeight: 700, color: "#1a1814", marginBottom: 4 } }, "Day ", state2.currentDay), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 12, color: "#b0a080", letterSpacing: "0.04em" } }, "HERE'S WHERE YOU STAND"), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => setShowDayStart(false), style: __spreadProps(__spreadValues({}, S.submit), { width: "auto", padding: "8px 18px", fontSize: 13, boxShadow: "none" }) }, "Let's go \u2726")), visiblePillars.map((p) => {
-      const liveStreaks = computeStreaks(state2.checkins, state2.boons, state2.currentDay || 1);
-      const liveBoons = state2.boons;
+      `), showDayStart && /* @__PURE__ */ import_react.default.createElement("div", { style: S.overlay, onClick: () => setShowDayStart(false) }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.modal), { maxHeight: "80vh", overflowY: "auto" }), onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 26, fontWeight: 700, color: "#1a1814", marginBottom: 4 } }, "Day ", state.currentDay), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 12, color: "#b0a080", letterSpacing: "0.04em" } }, "HERE'S WHERE YOU STAND"), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => setShowDayStart(false), style: __spreadProps(__spreadValues({}, S.submit), { width: "auto", padding: "8px 18px", fontSize: 13, boxShadow: "none" }) }, "Let's go \u2726")), visiblePillars.map((p) => {
+      const liveStreaks = computeStreaks(state.checkins, state.boons, state.currentDay || 1);
+      const liveBoons = state.boons;
       const unearned = BOONS.filter((b) => b.pillar === p.id && !liveBoons.includes(b.id));
       const scored = unearned.map((b) => {
         const streakKey = b.track || null;
@@ -11946,14 +11940,14 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
       marginTop: 12,
       textAlign: "center",
       animation: "trophyFade 0.8s ease 0.7s both"
-    } }, "\u2014 ", trophyReveal.source), /* @__PURE__ */ import_react.default.createElement("div", { style: { position: "absolute", bottom: 48, fontSize: 12, color: "#333", letterSpacing: "0.08em" } }, trophyRevealQueue.length > 0 ? `tap for next \xB7 ${trophyRevealQueue.length} more` : "tap to continue")), insightItem && /* @__PURE__ */ import_react.default.createElement("div", { style: S.overlay, onClick: () => dismissInsight() }, /* @__PURE__ */ import_react.default.createElement("div", { style: S.modal, className: "slide", onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalTag }, insightItem.pillar === "synergy" ? "\u2726 Synergy" : insightItem.earnedBy ? `\u2295 Achievement \xB7 ${((_b = pillarMap[insightItem.pillar]) == null ? void 0 : _b.name) || ""}` : `${((_c = pillarMap[insightItem.pillar]) == null ? void 0 : _c.icon) || ""} ${((_d = pillarMap[insightItem.pillar]) == null ? void 0 : _d.name) || ""}`), /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.modalTitle), { color: insightItem.earnedBy ? "#7EB8A4" : ((_e = pillarMap[insightItem.pillar]) == null ? void 0 : _e.color) || "#3D5A8A" }) }, insightItem.earnedBy ? "\u2295" : "\u2726", " ", insightItem.name), insightItem.daysValid !== void 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalTier }, insightItem.daysValid === null ? "Permanent achievement" : insightItem.daysValid === 1 ? "Lasts 1 day" : `Lasts ${insightItem.daysValid} days`), !insightItem.earnedBy && /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalTier }, "Tier ", insightItem.tier, " Boon"), /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalInsight }, insightItem.insight), /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalSource }, "\u2014 ", insightItem.source), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => dismissInsight(), style: S.modalClose }, insightQueue.length > 0 ? `Next \u2726 (${insightQueue.length} more)` : "Close"))), /* @__PURE__ */ import_react.default.createElement("div", { style: S.header }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: S.title }, "Boon")), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 5 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: S.statRow }, /* @__PURE__ */ import_react.default.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#666", borderColor: "#252520" }) }, "Day ", totalDays), /* @__PURE__ */ import_react.default.createElement("span", { style: S.statChip }, "\u2726 ", unlockedBoonCount, "/", BOONS.length), /* @__PURE__ */ import_react.default.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#7EB8A4", borderColor: "#7EB8A4" }) }, "\u2295 ", activeAchCount), /* @__PURE__ */ import_react.default.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#C4973A", borderColor: "#C4973A", fontWeight: 600 }) }, "\u2605 ", totalScore.toLocaleString()), state2.hardcoreMode && /* @__PURE__ */ import_react.default.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#D4848A", borderColor: "#D4848A", fontWeight: 700 }) }, "\u2694\uFE0F ", state2.hardcoreStreak || 0, "d")), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => setDevOpen((o) => !o), style: S.devToggle, className: "db" }, "\u2630 Settings"))), (() => {
+    } }, "\u2014 ", trophyReveal.source), /* @__PURE__ */ import_react.default.createElement("div", { style: { position: "absolute", bottom: 48, fontSize: 12, color: "#333", letterSpacing: "0.08em" } }, trophyRevealQueue.length > 0 ? `tap for next \xB7 ${trophyRevealQueue.length} more` : "tap to continue")), insightItem && /* @__PURE__ */ import_react.default.createElement("div", { style: S.overlay, onClick: () => dismissInsight() }, /* @__PURE__ */ import_react.default.createElement("div", { style: S.modal, className: "slide", onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalTag }, insightItem.pillar === "synergy" ? "\u2726 Synergy" : insightItem.earnedBy ? `\u2295 Achievement \xB7 ${((_b = pillarMap[insightItem.pillar]) == null ? void 0 : _b.name) || ""}` : `${((_c = pillarMap[insightItem.pillar]) == null ? void 0 : _c.icon) || ""} ${((_d = pillarMap[insightItem.pillar]) == null ? void 0 : _d.name) || ""}`), /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.modalTitle), { color: insightItem.earnedBy ? "#7EB8A4" : ((_e = pillarMap[insightItem.pillar]) == null ? void 0 : _e.color) || "#3D5A8A" }) }, insightItem.earnedBy ? "\u2295" : "\u2726", " ", insightItem.name), insightItem.daysValid !== void 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalTier }, insightItem.daysValid === null ? "Permanent achievement" : insightItem.daysValid === 1 ? "Lasts 1 day" : `Lasts ${insightItem.daysValid} days`), !insightItem.earnedBy && /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalTier }, "Tier ", insightItem.tier, " Boon"), /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalInsight }, insightItem.insight), /* @__PURE__ */ import_react.default.createElement("div", { style: S.modalSource }, "\u2014 ", insightItem.source), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => dismissInsight(), style: S.modalClose }, insightQueue.length > 0 ? `Next \u2726 (${insightQueue.length} more)` : "Close"))), /* @__PURE__ */ import_react.default.createElement("div", { style: S.header }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: S.title }, "Boon")), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 5 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: S.statRow }, /* @__PURE__ */ import_react.default.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#666", borderColor: "#252520" }) }, "Day ", totalDays), /* @__PURE__ */ import_react.default.createElement("span", { style: S.statChip }, "\u2726 ", unlockedBoonCount, "/", BOONS.length), /* @__PURE__ */ import_react.default.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#7EB8A4", borderColor: "#7EB8A4" }) }, "\u2295 ", activeAchCount), /* @__PURE__ */ import_react.default.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#C4973A", borderColor: "#C4973A", fontWeight: 600 }) }, "\u2605 ", totalScore.toLocaleString()), state.hardcoreMode && /* @__PURE__ */ import_react.default.createElement("span", { style: __spreadProps(__spreadValues({}, S.statChip), { color: "#D4848A", borderColor: "#D4848A", fontWeight: 700 }) }, "\u2694\uFE0F ", state.hardcoreStreak || 0, "d")), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => setDevOpen((o) => !o), style: S.devToggle, className: "db" }, "\u2630 Settings"))), (() => {
       const items = [
-        ...state2.boons.map((id) => {
+        ...state.boons.map((id) => {
           var _a2;
           const b = BOONS.find((x) => x.id === id);
           return b ? { type: "boon", label: b.name, icon: "\u2726", color: ((_a2 = PILLARS.find((p) => p.id === b.pillar)) == null ? void 0 : _a2.color) || "#3D5A8A", item: b } : null;
         }),
-        ...Object.keys(state2.achievements || {}).map((id) => {
+        ...Object.keys(state.achievements || {}).map((id) => {
           const a = ACHIEVEMENTS.find((x) => x.id === id);
           return a ? { type: "achievement", label: a.name, icon: "\u2295", color: "#7EB8A4", item: a } : null;
         })
@@ -11998,12 +11992,12 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
         "trophy_weight_10": { date: "day_10" },
         "trophy_hardcore_7": { date: "day_22" }
       };
-      update(__spreadProps(__spreadValues({}, state2), { trophies: __spreadValues(__spreadValues({}, state2.trophies || {}), demoTrophies) }));
+      update(__spreadProps(__spreadValues({}, state), { trophies: __spreadValues(__spreadValues({}, state.trophies || {}), demoTrophies) }));
     }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#C4973A", fontWeight: 500 }) }, "\u{1F3C6} Demo Trophies")), /* @__PURE__ */ import_react.default.createElement("div", { style: S.devRow }, /* @__PURE__ */ import_react.default.createElement(
       "button",
       {
         className: "db",
-        onClick: () => update(__spreadProps(__spreadValues({}, state2), { trophies: {} })),
+        onClick: () => update(__spreadProps(__spreadValues({}, state), { trophies: {} })),
         style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#888", fontWeight: 500 })
       },
       "Clear Trophies"
@@ -12011,14 +12005,14 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
       const yesterday = /* @__PURE__ */ new Date();
       yesterday.setDate(yesterday.getDate() - 1);
       const yStr = yesterday.toISOString().slice(0, 10);
-      update(__spreadProps(__spreadValues({}, state2), { hardcoreLastDate: yStr, dayEnded: true }));
+      update(__spreadProps(__spreadValues({}, state), { hardcoreLastDate: yStr, dayEnded: true }));
     }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#D4848A", fontWeight: 500 }) }, "\u2694\uFE0F Simulate Next Day")), /* @__PURE__ */ import_react.default.createElement("div", { style: S.devRow }, /* @__PURE__ */ import_react.default.createElement("button", { className: "db", onClick: () => {
-      const data = JSON.stringify(state2, null, 2);
+      const data = JSON.stringify(state, null, 2);
       const blob = new Blob([data], { type: "application/json" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `boon-backup-day${state2.currentDay || 1}.json`;
+      a.download = `boon-backup-day${state.currentDay || 1}.json`;
       a.click();
       URL.revokeObjectURL(url);
     }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#7EB8A4", fontWeight: 500 }) }, "\u2193 Export backup")), /* @__PURE__ */ import_react.default.createElement("div", { style: S.devRow }, /* @__PURE__ */ import_react.default.createElement("label", { style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#A89BC2", fontWeight: 500, cursor: "pointer" }) }, "\u2191 Import backup", /* @__PURE__ */ import_react.default.createElement("input", { type: "file", accept: ".json", style: { display: "none" }, onChange: (e) => {
@@ -12041,30 +12035,30 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
     } }))), /* @__PURE__ */ import_react.default.createElement("div", { style: { borderTop: "1px solid #ECEEF8", paddingTop: 10 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Weight Log"), /* @__PURE__ */ import_react.default.createElement("div", { style: S.devRow }, /* @__PURE__ */ import_react.default.createElement("input", { type: "number", step: "0.1", placeholder: "lbs", id: "weight-input", style: __spreadProps(__spreadValues({}, S.devInput), { width: 70 }) }), /* @__PURE__ */ import_react.default.createElement("button", { className: "db", onClick: () => {
       const val = parseFloat(document.getElementById("weight-input").value);
       if (!val || val <= 0) return;
-      const entry = { day: state2.currentDay || 1, weight: val, ts: Date.now() };
-      const log = [...state2.weightLog || [], entry];
-      update(__spreadProps(__spreadValues({}, state2), { weightLog: log }));
+      const entry = { day: state.currentDay || 1, weight: val, ts: Date.now() };
+      const log = [...state.weightLog || [], entry];
+      update(__spreadProps(__spreadValues({}, state), { weightLog: log }));
       document.getElementById("weight-input").value = "";
-    }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#7EB8A4", fontWeight: 500 }) }, "+ Log weight")), (state2.weightLog || []).length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 8 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#1a1814", marginBottom: 4 } }, "Latest: ", /* @__PURE__ */ import_react.default.createElement("span", { style: { fontWeight: 600, color: "#3D5A8A" } }, state2.weightLog[state2.weightLog.length - 1].weight, " lbs"), state2.weightLog.length > 1 && (() => {
-      const diff = state2.weightLog[state2.weightLog.length - 1].weight - state2.weightLog[0].weight;
+    }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#7EB8A4", fontWeight: 500 }) }, "+ Log weight")), (state.weightLog || []).length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 8 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#1a1814", marginBottom: 4 } }, "Latest: ", /* @__PURE__ */ import_react.default.createElement("span", { style: { fontWeight: 600, color: "#3D5A8A" } }, state.weightLog[state.weightLog.length - 1].weight, " lbs"), state.weightLog.length > 1 && (() => {
+      const diff = state.weightLog[state.weightLog.length - 1].weight - state.weightLog[0].weight;
       return /* @__PURE__ */ import_react.default.createElement("span", { style: { color: diff < 0 ? "#7EB8A4" : diff > 0 ? "#D4848A" : "#b0a080", marginLeft: 8, fontSize: 11 } }, diff === 0 ? "\u2014" : diff < 0 ? `\u2193 ${Math.abs(diff).toFixed(1)}` : `\u2191 ${diff.toFixed(1)}`, " since first log");
-    })()), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 4, fontSize: 10, color: "#b0a080" } }, state2.weightLog.slice(-8).map((e, i) => /* @__PURE__ */ import_react.default.createElement("span", { key: i, style: { background: "#ECEEF8", borderRadius: 6, padding: "2px 6px" } }, "Day ", e.day, ": ", e.weight))))), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", paddingTop: 4, borderTop: "1px solid #ECEEF8", lineHeight: 1.8 } }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", { style: { color: "#1a1814", fontWeight: 500 } }, "Boon")), /* @__PURE__ */ import_react.default.createElement("div", null, "Day ", state2.currentDay || 1, " \xB7 ", state2.boons.length, " boons \xB7 ", ACHIEVEMENTS.filter((a) => getAchievementStatus(a, state2.checkins, state2.achievements || {}, state2.currentDay || 1) === "active").length, " achievements active"), /* @__PURE__ */ import_react.default.createElement("div", { style: { color: "#c0b8a8", fontSize: 10 } }, "Data stored locally on this device"), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => {
+    })()), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 4, fontSize: 10, color: "#b0a080" } }, state.weightLog.slice(-8).map((e, i) => /* @__PURE__ */ import_react.default.createElement("span", { key: i, style: { background: "#ECEEF8", borderRadius: 6, padding: "2px 6px" } }, "Day ", e.day, ": ", e.weight))))), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", paddingTop: 4, borderTop: "1px solid #ECEEF8", lineHeight: 1.8 } }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("span", { style: { color: "#1a1814", fontWeight: 500 } }, "Boon")), /* @__PURE__ */ import_react.default.createElement("div", null, "Day ", state.currentDay || 1, " \xB7 ", state.boons.length, " boons \xB7 ", ACHIEVEMENTS.filter((a) => getAchievementStatus(a, state.checkins, state.achievements || {}, state.currentDay || 1) === "active").length, " achievements active"), /* @__PURE__ */ import_react.default.createElement("div", { style: { color: "#c0b8a8", fontSize: 10 } }, "Data stored locally on this device"), /* @__PURE__ */ import_react.default.createElement("button", { onClick: () => {
       if (window.confirm("Redo onboarding? Your data is preserved.")) {
         setOnboardStep(0);
         setOnboardData({
-          userName: state2.userName || "",
-          bodyType: state2.bodyType || "spartan",
-          soulLevel: state2.soulLevel || "faithful",
-          isMarried: state2.isMarried || null,
-          hasPartner: state2.hasPartner || null,
-          hasChildren: state2.hasChildren || null,
-          childrenAges: state2.childrenAges || null,
-          mindFocus: state2.mindFocus || null,
-          orderFocus: state2.orderFocus || null,
-          creativeProject: state2.creativeProject || "",
-          learningSubject: state2.learningSubject || ""
+          userName: state.userName || "",
+          bodyType: state.bodyType || "spartan",
+          soulLevel: state.soulLevel || "faithful",
+          isMarried: state.isMarried || null,
+          hasPartner: state.hasPartner || null,
+          hasChildren: state.hasChildren || null,
+          childrenAges: state.childrenAges || null,
+          mindFocus: state.mindFocus || null,
+          orderFocus: state.orderFocus || null,
+          creativeProject: state.creativeProject || "",
+          learningSubject: state.learningSubject || ""
         });
-        update(__spreadProps(__spreadValues({}, state2), { onboardingComplete: false }));
+        update(__spreadProps(__spreadValues({}, state), { onboardingComplete: false }));
       }
     }, style: {
       marginTop: 10,
@@ -12075,22 +12069,59 @@ window.onerror=function(m,s,l,c,e){document.getElementById('root').innerHTML='<p
       cursor: "pointer",
       textDecoration: "underline",
       padding: 0
-    } }, "Redo onboarding")), /* @__PURE__ */ import_react.default.createElement("div", { style: { borderTop: "1px solid #F0EDE6", paddingTop: 14 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: "#1a1814", marginBottom: 4 } }, "\u{1F3DB}\uFE0F Body Type"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginBottom: 12, lineHeight: 1.5 } }, "Defines your Fitness and Diet check pools. Changing body type resets Fitness and Diet tier progress. Boons, scores, and streaks are preserved."), BODY_TYPES.map((bt) => /* @__PURE__ */ import_react.default.createElement("div", { key: bt.id, style: {
+    } }, "Redo onboarding")), /* @__PURE__ */ import_react.default.createElement("div", { style: { borderTop: "1px solid #F0EDE6", paddingTop: 14, marginBottom: 14 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: "#1a1814", marginBottom: 4 } }, "\u{1F4CB} Order \u2014 Creative & Learning"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginBottom: 14 } }, "These appear as your T2 Order checks. Update them whenever your project or study changes."), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: 6 } }, "Creative project"), /* @__PURE__ */ import_react.default.createElement(
+      "input",
+      {
+        value: state.creativeProject || "",
+        onChange: (e) => update(__spreadProps(__spreadValues({}, state), { creativeProject: e.target.value })),
+        placeholder: "e.g. my novel, the renovation, my business",
+        style: {
+          width: "100%",
+          padding: "11px 14px",
+          borderRadius: 12,
+          border: "1.5px solid #E8E4DC",
+          fontSize: 14,
+          fontFamily: "'Inter',sans-serif",
+          color: "#1a1814",
+          background: "#fff",
+          outline: "none",
+          marginBottom: 14
+        }
+      }
+    ), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", letterSpacing: "0.07em", textTransform: "uppercase", marginBottom: 6 } }, "Learning subject"), /* @__PURE__ */ import_react.default.createElement(
+      "input",
+      {
+        value: state.learningSubject || "",
+        onChange: (e) => update(__spreadProps(__spreadValues({}, state), { learningSubject: e.target.value })),
+        placeholder: "e.g. Greek, guitar, woodworking",
+        style: {
+          width: "100%",
+          padding: "11px 14px",
+          borderRadius: 12,
+          border: "1.5px solid #E8E4DC",
+          fontSize: 14,
+          fontFamily: "'Inter',sans-serif",
+          color: "#1a1814",
+          background: "#fff",
+          outline: "none"
+        }
+      }
+    )), /* @__PURE__ */ import_react.default.createElement("div", { style: { borderTop: "1px solid #F0EDE6", paddingTop: 14 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: "#1a1814", marginBottom: 4 } }, "\u{1F3DB}\uFE0F Body Type"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginBottom: 12, lineHeight: 1.5 } }, "Defines your Fitness and Diet check pools. Changing body type resets Fitness and Diet tier progress. Boons, scores, and streaks are preserved."), BODY_TYPES.map((bt) => /* @__PURE__ */ import_react.default.createElement("div", { key: bt.id, style: {
       marginBottom: 8,
       padding: "10px 14px",
       borderRadius: 14,
       cursor: "pointer",
-      border: `1.5px solid ${state2.bodyType === bt.id ? "#3D5A8A" : "#E8E4DC"}`,
-      background: state2.bodyType === bt.id ? "rgba(61,90,138,0.06)" : "transparent",
+      border: `1.5px solid ${state.bodyType === bt.id ? "#3D5A8A" : "#E8E4DC"}`,
+      background: state.bodyType === bt.id ? "rgba(61,90,138,0.06)" : "transparent",
       transition: "all 0.2s"
     }, onClick: () => {
-      if (state2.bodyType === bt.id) return;
+      if (state.bodyType === bt.id) return;
       if (window.confirm(`Switch to ${bt.name}?
 
 Fitness and Diet tier progress will reset. Your boons, score, and streaks are preserved.
 
 This cannot be undone.`)) {
-        const newCheckins = __spreadValues({}, state2.checkins);
+        const newCheckins = __spreadValues({}, state.checkins);
         Object.keys(newCheckins).forEach((dk) => {
           var _a2, _b2;
           const day = __spreadValues({}, newCheckins[dk]);
@@ -12098,10 +12129,10 @@ This cannot be undone.`)) {
           (_b2 = day.__drawn) == null ? true : delete _b2.diet;
           newCheckins[dk] = day;
         });
-        update(__spreadProps(__spreadValues({}, state2), {
+        update(__spreadProps(__spreadValues({}, state), {
           bodyType: bt.id,
-          pillarT1Unlocked: __spreadProps(__spreadValues({}, state2.pillarT1Unlocked), { fitness: false, diet: false }),
-          pillarT1Progress: __spreadProps(__spreadValues({}, state2.pillarT1Progress), { fitness: 0, diet: 0 }),
+          pillarT1Unlocked: __spreadProps(__spreadValues({}, state.pillarT1Unlocked), { fitness: false, diet: false }),
+          pillarT1Progress: __spreadProps(__spreadValues({}, state.pillarT1Progress), { fitness: 0, diet: 0 }),
           checkins: newCheckins
         }));
       }
@@ -12109,13 +12140,13 @@ This cannot be undone.`)) {
       width: 16,
       height: 16,
       borderRadius: 8,
-      border: `2px solid ${state2.bodyType === bt.id ? "#3D5A8A" : "#ccc"}`,
-      background: state2.bodyType === bt.id ? "#3D5A8A" : "transparent",
+      border: `2px solid ${state.bodyType === bt.id ? "#3D5A8A" : "#ccc"}`,
+      background: state.bodyType === bt.id ? "#3D5A8A" : "transparent",
       flexShrink: 0,
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
-    } }, state2.bodyType === bt.id && /* @__PURE__ */ import_react.default.createElement("div", { style: { width: 6, height: 6, borderRadius: 3, background: "#fff" } })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: "#1a1814" } }, bt.name), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#6a6050", marginTop: 1 } }, bt.desc)))))), /* @__PURE__ */ import_react.default.createElement("div", { style: { borderTop: "1px solid #F0EDE6", paddingTop: 14 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: "#1a1814", display: "flex", alignItems: "center", gap: 6 } }, "\u2694\uFE0F Hardcore Mode", state2.hardcoreMode && /* @__PURE__ */ import_react.default.createElement("span", { style: {
+    } }, state.bodyType === bt.id && /* @__PURE__ */ import_react.default.createElement("div", { style: { width: 6, height: 6, borderRadius: 3, background: "#fff" } })), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: "#1a1814" } }, bt.name), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#6a6050", marginTop: 1 } }, bt.desc)))))), /* @__PURE__ */ import_react.default.createElement("div", { style: { borderTop: "1px solid #F0EDE6", paddingTop: 14 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: "#1a1814", display: "flex", alignItems: "center", gap: 6 } }, "\u2694\uFE0F Hardcore Mode", state.hardcoreMode && /* @__PURE__ */ import_react.default.createElement("span", { style: {
       fontSize: 9,
       color: "#D4848A",
       background: "rgba(212,132,138,0.1)",
@@ -12123,17 +12154,17 @@ This cannot be undone.`)) {
       padding: "1px 6px",
       letterSpacing: "0.06em",
       fontWeight: 700
-    } }, "ACTIVE")), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginTop: 3, lineHeight: 1.5 } }, "One day per real calendar day. Miss a day and your hardcore streak breaks. Turning this off also breaks your streak."), state2.hardcoreMode && state2.hardcoreStreak > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#D4848A", marginTop: 4, fontWeight: 600 } }, "\u2694\uFE0F Current streak: ", state2.hardcoreStreak, " day", state2.hardcoreStreak !== 1 ? "s" : "")), /* @__PURE__ */ import_react.default.createElement("div", { onClick: () => {
-      if (state2.hardcoreMode) {
-        update(__spreadProps(__spreadValues({}, state2), { hardcoreMode: false, hardcoreStreak: 0 }));
+    } }, "ACTIVE")), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginTop: 3, lineHeight: 1.5 } }, "One day per real calendar day. Miss a day and your hardcore streak breaks. Turning this off also breaks your streak."), state.hardcoreMode && state.hardcoreStreak > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#D4848A", marginTop: 4, fontWeight: 600 } }, "\u2694\uFE0F Current streak: ", state.hardcoreStreak, " day", state.hardcoreStreak !== 1 ? "s" : "")), /* @__PURE__ */ import_react.default.createElement("div", { onClick: () => {
+      if (state.hardcoreMode) {
+        update(__spreadProps(__spreadValues({}, state), { hardcoreMode: false, hardcoreStreak: 0 }));
       } else {
-        update(__spreadProps(__spreadValues({}, state2), { hardcoreMode: true, hardcoreLastDate: null }));
+        update(__spreadProps(__spreadValues({}, state), { hardcoreMode: true, hardcoreLastDate: null }));
       }
     }, style: {
       width: 44,
       height: 26,
       borderRadius: 13,
-      background: state2.hardcoreMode ? "#D4848A" : "#d0c8b8",
+      background: state.hardcoreMode ? "#D4848A" : "#d0c8b8",
       position: "relative",
       cursor: "pointer",
       transition: "background 0.2s",
@@ -12142,7 +12173,7 @@ This cannot be undone.`)) {
     } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
       position: "absolute",
       top: 3,
-      left: state2.hardcoreMode ? 20 : 3,
+      left: state.hardcoreMode ? 20 : 3,
       width: 20,
       height: 20,
       borderRadius: "50%",
@@ -12152,12 +12183,12 @@ This cannot be undone.`)) {
     } })))), /* @__PURE__ */ import_react.default.createElement("div", { style: { borderTop: "1px solid #F0EDE6", paddingTop: 10 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center" } }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, fontWeight: 500, color: "#1a1814" } }, "Weekend Warrior"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginTop: 2 } }, "Feats are 5\xD7 more likely on weekends")), /* @__PURE__ */ import_react.default.createElement(
       "div",
       {
-        onClick: () => update(__spreadProps(__spreadValues({}, state2), { weekendMode: !state2.weekendMode })),
+        onClick: () => update(__spreadProps(__spreadValues({}, state), { weekendMode: !state.weekendMode })),
         style: {
           width: 44,
           height: 26,
           borderRadius: 13,
-          background: state2.weekendMode ? "#3D5A8A" : "#d0c8b8",
+          background: state.weekendMode ? "#3D5A8A" : "#d0c8b8",
           position: "relative",
           cursor: "pointer",
           transition: "background 0.2s"
@@ -12166,7 +12197,7 @@ This cannot be undone.`)) {
       /* @__PURE__ */ import_react.default.createElement("div", { style: {
         position: "absolute",
         top: 3,
-        left: state2.weekendMode ? 20 : 3,
+        left: state.weekendMode ? 20 : 3,
         width: 20,
         height: 20,
         borderRadius: "50%",
@@ -12175,24 +12206,24 @@ This cannot be undone.`)) {
         boxShadow: "0 1px 4px rgba(0,0,0,0.2)"
       } })
     ))), /* @__PURE__ */ import_react.default.createElement("div", { style: { borderTop: "1px solid #ECEEF8", paddingTop: 10 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 } }, "Testing Tools"), /* @__PURE__ */ import_react.default.createElement("div", { style: S.devRow }, /* @__PURE__ */ import_react.default.createElement("span", { style: S.devLabel }, "+ 1 day for pillar:"), PILLARS.map((p) => /* @__PURE__ */ import_react.default.createElement("button", { key: p.id, className: "db", onClick: () => {
-      const ci = __spreadValues({}, state2.checkins);
-      const currentDay = state2.currentDay || 1;
+      const ci = __spreadValues({}, state.checkins);
+      const currentDay = state.currentDay || 1;
       let target = currentDay - 1;
       while (target >= 1 && ci[`day_${target}`]) target--;
       const dk = `day_${Math.max(1, target)}`;
       ci[dk] = { __drawn: {} };
       for (const pp of PILLARS) {
-        const drawn = drawChecks(pp.id, dk, state2.boons, ci, 4, state2);
+        const drawn = drawChecks(pp.id, dk, state.boons, ci, 4, state);
         ci[dk].__drawn[pp.id] = drawn.map((c) => c.id);
         if (pp.id === p.id) drawn.forEach((c) => {
           ci[dk][`${pp.id}_${c.id}`] = true;
         });
       }
-      const ns = computeStreaks(ci, state2.boons, state2.currentDay || 1);
-      const nextDay = (state2.currentDay || 1) + 1;
-      const draft = __spreadProps(__spreadValues({}, state2), { checkins: ci, streaks: ns, debugStreaks: null, currentDay: nextDay, dayEnded: false });
+      const ns = computeStreaks(ci, state.boons, state.currentDay || 1);
+      const nextDay = (state.currentDay || 1) + 1;
+      const draft = __spreadProps(__spreadValues({}, state), { checkins: ci, streaks: ns, debugStreaks: null, currentDay: nextDay, dayEnded: false });
       const nb = computeBoons(draft, true);
-      const unlocked = nb.filter((b) => !state2.boons.includes(b));
+      const unlocked = nb.filter((b) => !state.boons.includes(b));
       update(__spreadProps(__spreadValues({}, draft), { boons: nb }));
       setSubmitted(false);
       setTodayChecks({});
@@ -12202,14 +12233,14 @@ This cannot be undone.`)) {
       }
     }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: p.color, padding: "4px 8px", fontSize: 12 }) }, p.icon))), /* @__PURE__ */ import_react.default.createElement("div", { style: S.devRow }, /* @__PURE__ */ import_react.default.createElement("span", { style: __spreadProps(__spreadValues({}, S.devLabel), { color: "#D4848A" }) }, "Set streaks"), /* @__PURE__ */ import_react.default.createElement("input", { type: "number", min: 1, max: 60, defaultValue: 5, id: "si", style: S.devInput }), /* @__PURE__ */ import_react.default.createElement("span", { style: S.devLabel }, "days for:"), PILLARS.map((p) => /* @__PURE__ */ import_react.default.createElement("button", { key: p.id, className: "db", onClick: () => {
       const n = Number(document.getElementById("si").value) || 5;
-      const current = state2.debugStreaks || computeStreaks(state2.checkins, state2.boons, state2.currentDay || 1);
+      const current = state.debugStreaks || computeStreaks(state.checkins, state.boons, state.currentDay || 1);
       const ds = __spreadValues({}, current);
       CHECK_POOLS[p.id].forEach((c) => {
         ds[`${p.id}_${c.id}`] = n;
       });
       ds[`${p.id}_active`] = n;
       ds[`${p.id}_full`] = n;
-      const draft = __spreadProps(__spreadValues({}, state2), { debugStreaks: ds, streaks: ds });
+      const draft = __spreadProps(__spreadValues({}, state), { debugStreaks: ds, streaks: ds });
       const nb = computeBoons(draft);
       update(__spreadProps(__spreadValues({}, draft), { boons: nb }));
     }, style: __spreadProps(__spreadValues({}, S.devBtn), { color: p.color, padding: "4px 8px", fontSize: 12 }) }, p.icon))), /* @__PURE__ */ import_react.default.createElement("div", { style: S.devRow }, /* @__PURE__ */ import_react.default.createElement(
@@ -12220,14 +12251,14 @@ This cannot be undone.`)) {
         style: __spreadProps(__spreadValues({}, S.devBtn), { color: "#D4848A", fontWeight: 500 })
       },
       "\u21BA Reset everything"
-    ), /* @__PURE__ */ import_react.default.createElement("button", { className: "db", onClick: () => update(__spreadProps(__spreadValues({}, state2), { debugStreaks: null })), style: S.devBtn }, "Clear overrides")), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 10, color: "#c0b8a8", marginTop: 4, lineHeight: 1.7 } }, PILLARS.map((p) => `${p.name}: ${(state2.debugStreaks || computeStreaks(state2.checkins, state2.boons, state2.currentDay || 1))[`${p.id}_active`] || 0}d`).join(" \xB7 ")))), hardcoreBlocked && /* @__PURE__ */ import_react.default.createElement("div", { style: S.overlay, onClick: () => setHardcoreBlocked(false) }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.modal), { padding: "28px 24px", maxWidth: 320, borderTop: "3px solid #D4848A" }), onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 28, marginBottom: 10, textAlign: "center" } }, "\u2694\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", { style: {
+    ), /* @__PURE__ */ import_react.default.createElement("button", { className: "db", onClick: () => update(__spreadProps(__spreadValues({}, state), { debugStreaks: null })), style: S.devBtn }, "Clear overrides")), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 10, color: "#c0b8a8", marginTop: 4, lineHeight: 1.7 } }, PILLARS.map((p) => `${p.name}: ${(state.debugStreaks || computeStreaks(state.checkins, state.boons, state.currentDay || 1))[`${p.id}_active`] || 0}d`).join(" \xB7 ")))), hardcoreBlocked && /* @__PURE__ */ import_react.default.createElement("div", { style: S.overlay, onClick: () => setHardcoreBlocked(false) }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.modal), { padding: "28px 24px", maxWidth: 320, borderTop: "3px solid #D4848A" }), onClick: (e) => e.stopPropagation() }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 28, marginBottom: 10, textAlign: "center" } }, "\u2694\uFE0F"), /* @__PURE__ */ import_react.default.createElement("div", { style: {
       fontFamily: "'Cormorant Garamond',serif",
       fontSize: 22,
       fontWeight: 700,
       color: "#D4848A",
       marginBottom: 10,
       textAlign: "center"
-    } }, "Hardcore Mode"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 14, color: "#6a6050", lineHeight: 1.7, marginBottom: 20, textAlign: "center" } }, "You have already played today. Come back tomorrow."), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", textAlign: "center", marginBottom: 20 } }, "Hardcore streak: ", /* @__PURE__ */ import_react.default.createElement("span", { style: { color: "#D4848A", fontWeight: 700 } }, state2.hardcoreStreak, " day", state2.hardcoreStreak !== 1 ? "s" : "")), /* @__PURE__ */ import_react.default.createElement(
+    } }, "Hardcore Mode"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 14, color: "#6a6050", lineHeight: 1.7, marginBottom: 20, textAlign: "center" } }, "You have already played today. Come back tomorrow."), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", textAlign: "center", marginBottom: 20 } }, "Hardcore streak: ", /* @__PURE__ */ import_react.default.createElement("span", { style: { color: "#D4848A", fontWeight: 700 } }, state.hardcoreStreak, " day", state.hardcoreStreak !== 1 ? "s" : "")), /* @__PURE__ */ import_react.default.createElement(
       "button",
       {
         onClick: () => setHardcoreBlocked(false),
@@ -12301,9 +12332,9 @@ This cannot be undone.`)) {
       },
       label
     ))), view === "checkin" && /* @__PURE__ */ import_react.default.createElement("div", { style: S.content }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.tabs), { overflowX: "auto", scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", scrollbarWidth: "none", msOverflowStyle: "none", paddingBottom: 8, alignItems: "flex-end" }) }, visiblePillars.map((p) => {
-      const drawn = drawChecks(p.id, todayKey, state2.boons, state2.checkins, 4, state2);
+      const drawn = drawChecks(p.id, todayKey, state.boons, state.checkins, 4, state);
       const allDone = drawn.every((c) => todayChecks[`${p.id}_${c.id}`]);
-      const tier = getUnlockedTier(p.id, state2.boons);
+      const tier = getUnlockedTier(p.id, state.boons);
       return /* @__PURE__ */ import_react.default.createElement(
         "button",
         {
@@ -12330,9 +12361,9 @@ This cannot be undone.`)) {
         allDone && /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 8, color: p.color } }, "\u25CF")
       );
     })), visiblePillars.filter((p) => p.id === activePillar).map((pillar) => {
-      const drawn = drawChecks(pillar.id, todayKey, state2.boons, state2.checkins, 4, state2);
+      const drawn = drawChecks(pillar.id, todayKey, state.boons, state.checkins, 4, state);
       const fullStreak = streaks[`${pillar.id}_full`] || 0;
-      const tier = getUnlockedTier(pillar.id, state2.boons);
+      const tier = getUnlockedTier(pillar.id, state.boons);
       return /* @__PURE__ */ import_react.default.createElement("div", { key: pillar.id, style: { animation: "ignite 0.28s ease" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: S.pillarHead }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.pillarName), { color: pillar.color }) }, pillar.icon, " ", pillar.name), /* @__PURE__ */ import_react.default.createElement("div", { style: S.pillarDesc }, pillar.desc), (() => {
         const hint = closeSynergyBoons.find(
           ({ missingBoon }) => missingBoon && BOONS.find((b) => b.id === missingBoon.id && b.pillar === pillar.id)
@@ -12345,14 +12376,19 @@ This cannot be undone.`)) {
         const checked = !!todayChecks[key];
         const completions = streaks[key] || 0;
         const isFeat = check.feat;
-        const featCount = isFeat ? ((_a2 = state2.featCompletions) == null ? void 0 : _a2[check.id]) || 0 : 0;
+        const featCount = isFeat ? ((_a2 = state.featCompletions) == null ? void 0 : _a2[check.id]) || 0 : 0;
         const featColor = featCount >= 25 ? "#B22222" : featCount >= 10 ? "#B8A020" : featCount >= 5 ? "#888" : null;
         const trackingBoon = BOONS.find((b) => b.pillar === pillar.id && b.track === key);
-        const boonEarned = trackingBoon && state2.boons.includes(trackingBoon.id);
+        const boonEarned = trackingBoon && state.boons.includes(trackingBoon.id);
+        const boonStatus = boonEarned && trackingBoon ? getBoonStatus(trackingBoon, state.checkins, state.boons, streaks, state) : null;
+        const boonDormant = boonEarned && (boonStatus == null ? void 0 : boonStatus.dormant);
+        const boonActive = boonEarned && !boonDormant;
+        const windowCount = (boonStatus == null ? void 0 : boonStatus.count) || 0;
+        const windowNeeded = (boonStatus == null ? void 0 : boonStatus.needed) || 0;
         const need = (trackingBoon == null ? void 0 : trackingBoon.need) || 999;
         const boonReady = trackingBoon && !boonEarned && completions >= need - 1 && completions < need;
         const boonClose = trackingBoon && !boonEarned && !boonReady && completions >= 1;
-        const cardClass = `chk${boonEarned ? " flameCard" : boonReady ? " glowCard" : boonClose ? " shimmerCard" : ""}`;
+        const cardClass = `chk${boonActive ? " flameCard" : boonReady ? " glowCard" : boonClose ? " shimmerCard" : ""}`;
         return /* @__PURE__ */ import_react.default.createElement(
           "div",
           {
@@ -12363,7 +12399,7 @@ This cannot be undone.`)) {
               cursor: submitted ? "default" : "pointer",
               opacity: submitted && !checked ? 0.4 : 1,
               background: isFeat ? "rgba(126,184,164,0.06)" : "#fff",
-              border: isFeat ? `1.5px solid ${featColor || "rgba(126,184,164,0.35)"}` : boonEarned ? "2px solid #ff5500" : boonReady ? `2px solid #55aaff` : boonClose ? "1.5px solid rgba(61,90,138,0.4)" : "1.5px solid #ECE6D8",
+              border: isFeat ? `1.5px solid ${featColor || "rgba(126,184,164,0.35)"}` : boonActive ? "2px solid #ff5500" : boonDormant ? "1.5px solid #E0DAD0" : boonReady ? `2px solid #55aaff` : boonClose ? "1.5px solid rgba(61,90,138,0.4)" : "1.5px solid #ECE6D8",
               position: "relative",
               flexWrap: "wrap"
             })
@@ -12374,18 +12410,18 @@ This cannot be undone.`)) {
             background: checked ? isFeat ? "#7EB8A4" : pillar.color : "transparent",
             borderColor: checked ? isFeat ? "#7EB8A4" : pillar.color : isFeat ? "rgba(126,184,164,0.4)" : "#d8d0c0",
             transition: "all 0.2s"
-          }) }, checked && /* @__PURE__ */ import_react.default.createElement("span", { style: { color: "#fff", fontSize: 11, fontWeight: 700 } }, "\u2713")), /* @__PURE__ */ import_react.default.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.checkLbl), { fontSize: 15, fontWeight: 600, color: "#1a1814", letterSpacing: "0.01em" }) }, check.label), isFeat && /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6, marginTop: 2 } }, /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 9, color: featColor || "#7EB8A4", letterSpacing: "0.06em", fontWeight: 700 } }, featCount >= 25 ? "\u{1F451} MASTER" : featCount >= 10 ? "\u2605 GOLD" : featCount >= 5 ? "\u25C6 SILVER" : "FEAT"), featCount > 0 && /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 9, color: featColor || "#7EB8A4", fontWeight: 600 } }, featCount, "\xD7")), !isFeat && check.tier >= 2 && /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 9, color: pillar.color, marginTop: 1, letterSpacing: "0.05em", fontWeight: 500 } }, check.tier === 3 ? "T3" : "T2")), boonEarned && /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 18 }, className: "flameEmoji" }, "\u{1F525}"), boonReady && /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 14, color: "#55aaff" } }, "\u26A1")),
-          completions > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 6, paddingTop: 6, borderTop: "1px solid #F2EEE3" } }, /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 10, color: "#b0a080" } }, trackingBoon && !boonEarned && `${Math.max(0, (trackingBoon.need || 0) - completions)} to go`), /* @__PURE__ */ import_react.default.createElement("span", { style: {
-            color: boonEarned ? "#3D5A8A" : pillar.color,
+          }) }, checked && /* @__PURE__ */ import_react.default.createElement("span", { style: { color: "#fff", fontSize: 11, fontWeight: 700 } }, "\u2713")), /* @__PURE__ */ import_react.default.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.checkLbl), { fontSize: 15, fontWeight: 600, color: "#1a1814", letterSpacing: "0.01em" }) }, check.label), isFeat && /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: 6, marginTop: 2 } }, /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 9, color: featColor || "#7EB8A4", letterSpacing: "0.06em", fontWeight: 700 } }, featCount >= 25 ? "\u{1F451} MASTER" : featCount >= 10 ? "\u2605 GOLD" : featCount >= 5 ? "\u25C6 SILVER" : "FEAT"), featCount > 0 && /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 9, color: featColor || "#7EB8A4", fontWeight: 600 } }, featCount, "\xD7")), !isFeat && check.tier >= 2 && /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 9, color: pillar.color, marginTop: 1, letterSpacing: "0.05em", fontWeight: 500 } }, check.tier === 3 ? "T3" : "T2")), boonActive && /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 18 }, className: "flameEmoji" }, "\u{1F525}"), boonDormant && /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 14, color: "#b0a080" } }, "\u25CB"), boonReady && /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 14, color: "#55aaff" } }, "\u26A1")),
+          completions > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 6, paddingTop: 6, borderTop: "1px solid #F2EEE3" } }, /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 10, color: "#b0a080" } }, trackingBoon && !boonEarned && `${Math.max(0, (trackingBoon.need || 0) - completions)} to go`, boonDormant && `rebuild \u2014 ${windowCount} of ${windowNeeded}`), /* @__PURE__ */ import_react.default.createElement("span", { style: {
+            color: boonActive ? "#3D5A8A" : boonDormant ? "#b0a080" : pillar.color,
             fontSize: 11,
             fontWeight: 600,
-            background: boonEarned ? "rgba(61,90,138,0.1)" : `rgba(${hexToRgb(pillar.color)},0.1)`,
+            background: boonActive ? "rgba(61,90,138,0.1)" : boonDormant ? "rgba(180,170,155,0.1)" : `rgba(${hexToRgb(pillar.color)},0.1)`,
             borderRadius: 10,
             padding: "2px 9px"
-          } }, completions, "\xD7"))
+          } }, boonDormant ? `${windowCount}/${windowNeeded}` : `${completions}\xD7`))
         );
       })), (() => {
-        const unearned = BOONS.filter((b) => b.pillar === pillar.id && !state2.boons.includes(b.id));
+        const unearned = BOONS.filter((b) => b.pillar === pillar.id && !state.boons.includes(b.id));
         if (!unearned.length) return /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.hint), { background: `rgba(${hexToRgb(pillar.color)},0.08)`, textAlign: "center", padding: "16px" }) }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 18, marginBottom: 4 } }, "\u2726"), /* @__PURE__ */ import_react.default.createElement("div", { style: { color: pillar.color, fontSize: 14, fontFamily: "'Cormorant Garamond',serif", fontWeight: 700 } }, "All ", pillar.name, " boons unlocked"));
         const scored = unearned.map((b) => {
           const sk = b.track || null;
@@ -12399,7 +12435,7 @@ This cannot be undone.`)) {
         const condStr = next.condition.toString();
         const prereqMatch = condStr.match(/boons\.includes\("(\w+)"\)/);
         const prereqId = prereqMatch ? prereqMatch[1] : null;
-        const prereqBoon = prereqId && !state2.boons.includes(prereqId) ? BOONS.find((b) => b.id === prereqId) : null;
+        const prereqBoon = prereqId && !state.boons.includes(prereqId) ? BOONS.find((b) => b.id === prereqId) : null;
         const ready = pct >= 100 && !prereqBoon;
         return /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.hint), { border: `1px solid rgba(${hexToRgb(pillar.color)},${ready ? 0.5 : 0.15})`, background: ready ? `rgba(${hexToRgb(pillar.color)},0.06)` : "#fff" }) }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 3 } }, ready ? "\u2726 Ready to unlock" : "Next boon", " \xB7 Tier ", next.tier), /* @__PURE__ */ import_react.default.createElement("div", { style: { color: pillar.color, fontSize: 16, fontFamily: "'Cormorant Garamond',serif", fontWeight: 700, marginBottom: 2 } }, next.name), /* @__PURE__ */ import_react.default.createElement("div", { style: { color: "#6a6050", fontSize: 12, lineHeight: 1.4 } }, next.desc)), /* @__PURE__ */ import_react.default.createElement(
           "button",
@@ -12411,14 +12447,14 @@ This cannot be undone.`)) {
           "Insight"
         )), streakKey && /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { style: { height: 6, background: "#ECEEF8", borderRadius: 4, overflow: "hidden", marginBottom: 4 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { height: "100%", width: `${pct}%`, background: pillar.color, borderRadius: 4, transition: "width 0.4s ease" } })), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", justifyContent: "space-between", fontSize: 11, color: "#b0a080" } }, /* @__PURE__ */ import_react.default.createElement("span", null, streakKey.replace(pillar.id + "_", "").replace(/_/g, " ")), /* @__PURE__ */ import_react.default.createElement("span", { style: { fontWeight: 600, color: pct >= 100 ? pillar.color : "#b0a080" } }, currentCount, " / ", threshold))), prereqBoon && /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginTop: 6 } }, "Also needs: ", /* @__PURE__ */ import_react.default.createElement("span", { style: { color: pillar.color, fontWeight: 500 } }, prereqBoon.name)));
       })());
-    }), !submitted ? /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, /* @__PURE__ */ import_react.default.createElement("button", { className: "sb", onClick: handleSave, style: __spreadProps(__spreadValues({}, S.submit), { background: "rgba(61,90,138,0.15)", color: "#3D5A8A", boxShadow: "none" }) }, "Save Progress"), /* @__PURE__ */ import_react.default.createElement("button", { className: "sb", onClick: () => setShowEndDayConfirm(true), style: S.submit }, "End Day \u2726")) : /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: S.done }, "\u2726 Day ", state2.currentDay, " complete"), /* @__PURE__ */ import_react.default.createElement("button", { className: "sb", onClick: handleNewDay, style: __spreadProps(__spreadValues({}, S.submit), { background: "rgba(126,184,164,0.2)", color: "#7EB8A4", boxShadow: "none" }) }, "Start Day ", (state2.currentDay || 1) + 1, " \u2192"))), view === "myboons" && /* @__PURE__ */ import_react.default.createElement("div", { style: S.content }, state2.boons.length === 0 ? /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center", padding: "48px 24px", color: "#6a6050" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, marginBottom: 8, color: "#1a1814" } }, "No boons yet"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 12 } }, "Complete daily check-ins to earn your first boon.")) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { style: { padding: "16px 2px 10px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 20, color: "#3D5A8A" } }, "\u2726 Earned Boons"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080" } }, state2.boons.length, " of ", BOONS.length)), [...visiblePillars, { id: "synergy", name: "Synergy", icon: "\u2726", color: "#3D5A8A" }].map((p) => {
+    }), !submitted ? /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, /* @__PURE__ */ import_react.default.createElement("button", { className: "sb", onClick: handleSave, style: __spreadProps(__spreadValues({}, S.submit), { background: "rgba(61,90,138,0.15)", color: "#3D5A8A", boxShadow: "none" }) }, "Save Progress"), /* @__PURE__ */ import_react.default.createElement("button", { className: "sb", onClick: () => setShowEndDayConfirm(true), style: S.submit }, "End Day \u2726")) : /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: S.done }, "\u2726 Day ", state.currentDay, " complete"), /* @__PURE__ */ import_react.default.createElement("button", { className: "sb", onClick: handleNewDay, style: __spreadProps(__spreadValues({}, S.submit), { background: "rgba(126,184,164,0.2)", color: "#7EB8A4", boxShadow: "none" }) }, "Start Day ", (state.currentDay || 1) + 1, " \u2192"))), view === "myboons" && /* @__PURE__ */ import_react.default.createElement("div", { style: S.content }, state.boons.length === 0 ? /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center", padding: "48px 24px", color: "#6a6050" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, marginBottom: 8, color: "#1a1814" } }, "No boons yet"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 12 } }, "Complete daily check-ins to earn your first boon.")) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", { style: { padding: "16px 2px 10px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 20, color: "#3D5A8A" } }, "\u2726 Earned Boons"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080" } }, state.boons.length, " of ", BOONS.length)), [...visiblePillars, { id: "synergy", name: "Synergy", icon: "\u2726", color: "#3D5A8A" }].map((p) => {
       var _a2;
-      const earned = BOONS.filter((b) => b.pillar === p.id && state2.boons.includes(b.id));
+      const earned = BOONS.filter((b) => b.pillar === p.id && state.boons.includes(b.id));
       if (!earned.length) return null;
       const col = ((_a2 = pillarMap[p.id]) == null ? void 0 : _a2.color) || "#3D5A8A";
       return /* @__PURE__ */ import_react.default.createElement("div", { key: p.id, style: { marginBottom: 22 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonPHead), { color: col }) }, p.icon, " ", p.name), /* @__PURE__ */ import_react.default.createElement("div", { style: S.boonGrid }, earned.map((boon) => {
         var _a3;
-        const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow, graceActive } = getBoonStatus(boon, state2.checkins, state2.boons, streaks, state2);
+        const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow, graceActive } = getBoonStatus(boon, state.checkins, state.boons, streaks, state);
         const bCol = ((_a3 = pillarMap[boon.pillar]) == null ? void 0 : _a3.color) || "#3D5A8A";
         return /* @__PURE__ */ import_react.default.createElement("div", { key: boon.id, style: __spreadProps(__spreadValues({}, S.boonCard), {
           borderColor: dormant ? "#252520" : bCol,
@@ -12436,7 +12472,7 @@ This cannot be undone.`)) {
       })));
     }))), view === "achievements" && /* @__PURE__ */ import_react.default.createElement("div", { style: S.content }, /* @__PURE__ */ import_react.default.createElement("div", { style: { padding: "16px 2px 10px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 20, color: "#7EB8A4", fontWeight: 500 } }, "\u2295 Achievements"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#555" } }, activeAchCount, " active")), (() => {
       const anyEarned = ACHIEVEMENTS.some((a) => {
-        const s = getAchievementStatus(a, state2.checkins, state2.achievements || {}, state2.currentDay || 1);
+        const s = getAchievementStatus(a, state.checkins, state.achievements || {}, state.currentDay || 1);
         return s === "active";
       });
       if (!anyEarned) return /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center", padding: "60px 24px", color: "#888" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 32, marginBottom: 12 } }, "\u2295"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 20, color: "#b0a080", marginBottom: 8 } }, "No Achievements Earned Yet"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, color: "#666", lineHeight: 1.6 } }, "Complete feat checks and reach milestones to earn achievements. They will appear here."));
@@ -12446,21 +12482,21 @@ This cannot be undone.`)) {
       const allPillarAchs = ACHIEVEMENTS.filter((a) => a.pillar === p.id);
       if (!allPillarAchs.length) return null;
       const pillarAchs = allPillarAchs.filter((a) => {
-        const status = getAchievementStatus(a, state2.checkins, state2.achievements || {}, state2.currentDay || 1);
+        const status = getAchievementStatus(a, state.checkins, state.achievements || {}, state.currentDay || 1);
         return status === "active";
       });
       if (!pillarAchs.length) return null;
       const col = ((_a2 = pillarMap[p.id]) == null ? void 0 : _a2.color) || "#3D5A8A";
       return /* @__PURE__ */ import_react.default.createElement("div", { key: p.id, style: { marginBottom: 24 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonPHead), { color: col }) }, p.icon, " ", p.name), /* @__PURE__ */ import_react.default.createElement("div", { style: S.boonGrid }, pillarAchs.map((ach2) => {
         var _a3, _b2;
-        const achStatus = getAchievementStatus(ach2, state2.checkins, state2.achievements || {}, state2.currentDay || 1);
-        const earnedDay = parseInt((((_a3 = (state2.achievements || {})[ach2.id]) == null ? void 0 : _a3.date) || "day_0").replace("day_", "")) || 0;
-        const daysLeft = achStatus === "active" && ach2.daysValid ? ach2.daysValid - ((state2.currentDay || 1) - earnedDay) : null;
+        const achStatus = getAchievementStatus(ach2, state.checkins, state.achievements || {}, state.currentDay || 1);
+        const earnedDay = parseInt((((_a3 = (state.achievements || {})[ach2.id]) == null ? void 0 : _a3.date) || "day_0").replace("day_", "")) || 0;
+        const daysLeft = achStatus === "active" && ach2.daysValid ? ach2.daysValid - ((state.currentDay || 1) - earnedDay) : null;
         const isNew = newlyEarnedAch.includes(ach2.id);
         const isFeatTrophy = ["first_feat", "hat_trick", "devoted_feat", "master_feat"].includes(ach2.id);
         const isPermanent = ach2.daysValid === null;
-        const featCount = ach2.id === "master_feat" ? Math.max(...Object.values(state2.featCompletions || {}).map((v) => v || 0), 0) : ach2.id === "devoted_feat" ? Math.max(...Object.values(state2.featCompletions || {}).map((v) => v || 0), 0) : ach2.id === "hat_trick" ? Math.max(...Object.values(state2.featCompletions || {}).map((v) => v || 0), 0) : ach2.id === "first_feat" ? Object.values(state2.featCompletions || {}).reduce((s, v) => s + (v || 0), 0) : 0;
-        const timesEarned = (state2.achievements || {})[ach2.id] ? 1 : 0;
+        const featCount = ach2.id === "master_feat" ? Math.max(...Object.values(state.featCompletions || {}).map((v) => v || 0), 0) : ach2.id === "devoted_feat" ? Math.max(...Object.values(state.featCompletions || {}).map((v) => v || 0), 0) : ach2.id === "hat_trick" ? Math.max(...Object.values(state.featCompletions || {}).map((v) => v || 0), 0) : ach2.id === "first_feat" ? Object.values(state.featCompletions || {}).reduce((s, v) => s + (v || 0), 0) : 0;
+        const timesEarned = (state.achievements || {})[ach2.id] ? 1 : 0;
         const isActive = achStatus === "active";
         const isExpired = false;
         const isLocked = achStatus === "locked";
@@ -12491,7 +12527,7 @@ This cannot be undone.`)) {
           }) }, ach2.icon), /* @__PURE__ */ import_react.default.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonName), {
             color: isFeatTrophy ? trophyColor : "#ffffff",
             fontWeight: 700
-          }) }, ach2.name), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, marginTop: 2, display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" } }, isActive && /* @__PURE__ */ import_react.default.createElement("span", { style: { color: activeColor, fontWeight: 500 } }, ((_b2 = (state2.achievements || {})[ach2.id]) == null ? void 0 : _b2.count) > 1 ? `Earned ${(state2.achievements || {})[ach2.id].count} times` : "Earned \u2726"), isFeatTrophy && featCount > 0 && /* @__PURE__ */ import_react.default.createElement("span", { style: { color: trophyColor, fontWeight: 600, fontSize: 10 } }, "Best: ", featCount, "\xD7"))), achStatus !== "locked" && /* @__PURE__ */ import_react.default.createElement(
+          }) }, ach2.name), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, marginTop: 2, display: "flex", gap: 6, flexWrap: "wrap", alignItems: "center" } }, isActive && /* @__PURE__ */ import_react.default.createElement("span", { style: { color: activeColor, fontWeight: 500 } }, ((_b2 = (state.achievements || {})[ach2.id]) == null ? void 0 : _b2.count) > 1 ? `Earned ${(state.achievements || {})[ach2.id].count} times` : "Earned \u2726"), isFeatTrophy && featCount > 0 && /* @__PURE__ */ import_react.default.createElement("span", { style: { color: trophyColor, fontWeight: 600, fontSize: 10 } }, "Best: ", featCount, "\xD7"))), achStatus !== "locked" && /* @__PURE__ */ import_react.default.createElement(
             "button",
             {
               className: "ib",
@@ -12533,9 +12569,9 @@ This cannot be undone.`)) {
       if (!pb.length) return null;
       return /* @__PURE__ */ import_react.default.createElement("div", { key: p.id, style: { marginBottom: 28 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: __spreadProps(__spreadValues({}, S.boonPHead), { color: p.color || "#3D5A8A" }) }, p.icon, " ", p.name), /* @__PURE__ */ import_react.default.createElement("div", { style: S.boonGrid }, pb.map((boon) => {
         var _a2, _b2;
-        const unlocked = state2.boons.includes(boon.id);
-        const available = !unlocked && boon.condition(__spreadProps(__spreadValues({}, state2), { streaks }));
-        const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow } = getBoonStatus(boon, state2.checkins, state2.boons, streaks, state2);
+        const unlocked = state.boons.includes(boon.id);
+        const available = !unlocked && boon.condition(__spreadProps(__spreadValues({}, state), { streaks }));
+        const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow } = getBoonStatus(boon, state.checkins, state.boons, streaks, state);
         const col = ((_a2 = pillarMap[boon.pillar]) == null ? void 0 : _a2.color) || "#3D5A8A";
         return /* @__PURE__ */ import_react.default.createElement(
           "div",
@@ -12568,7 +12604,7 @@ This cannot be undone.`)) {
           }))
         );
       })));
-    })), view === "trophies" && /* @__PURE__ */ import_react.default.createElement("div", { style: S.content }, /* @__PURE__ */ import_react.default.createElement("div", { style: { padding: "16px 2px 14px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, color: "#1a1814", fontWeight: 700 } }, "Trophies"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080" } }, Object.keys(state2.trophies || {}).length, " of ", TROPHIES.length, " found")), Object.keys(state2.trophies || {}).length === 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center", padding: "60px 24px" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 48, marginBottom: 16 } }, "\u{1F3C6}"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, color: "#b0a080", marginBottom: 12 } }, "No Trophies Yet"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, color: "#666", lineHeight: 1.7 } }, "Trophies are earned through streaks, milestones, scores, and hidden accomplishments. They reveal themselves when the time is right.")), [
+    })), view === "trophies" && /* @__PURE__ */ import_react.default.createElement("div", { style: S.content }, /* @__PURE__ */ import_react.default.createElement("div", { style: { padding: "16px 2px 14px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, color: "#1a1814", fontWeight: 700 } }, "Trophies"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080" } }, Object.keys(state.trophies || {}).length, " of ", TROPHIES.length, " found")), Object.keys(state.trophies || {}).length === 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center", padding: "60px 24px" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 48, marginBottom: 16 } }, "\u{1F3C6}"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, color: "#b0a080", marginBottom: 12 } }, "No Trophies Yet"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, color: "#666", lineHeight: 1.7 } }, "Trophies are earned through streaks, milestones, scores, and hidden accomplishments. They reveal themselves when the time is right.")), [
       { key: "streak", label: "Streak", icon: "\u{1F525}" },
       { key: "score", label: "Score", icon: "\u2605" },
       { key: "milestone", label: "Milestone", icon: "\u{1F31F}" },
@@ -12578,7 +12614,7 @@ This cannot be undone.`)) {
       { key: "hidden", label: "Hidden", icon: "\u{1F52E}" }
     ].map((cat) => {
       const catTrophies = TROPHIES.filter((t) => t.category === cat.key);
-      const earned = catTrophies.filter((t) => (state2.trophies || {})[t.id]);
+      const earned = catTrophies.filter((t) => (state.trophies || {})[t.id]);
       if (!earned.length) return null;
       return /* @__PURE__ */ import_react.default.createElement("div", { key: cat.key, style: { marginBottom: 24 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: {
         fontSize: 11,
@@ -12599,7 +12635,7 @@ This cannot be undone.`)) {
         fontWeight: 700
       } }, earned.length, " / ", catTrophies.length)), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 8 } }, earned.map((trophy) => {
         var _a2;
-        const earnedDay = parseInt((((_a2 = (state2.trophies || {})[trophy.id]) == null ? void 0 : _a2.date) || "day_0").replace("day_", "")) || 0;
+        const earnedDay = parseInt((((_a2 = (state.trophies || {})[trophy.id]) == null ? void 0 : _a2.date) || "day_0").replace("day_", "")) || 0;
         return /* @__PURE__ */ import_react.default.createElement("div", { key: trophy.id, style: {
           background: "#000",
           borderRadius: 16,
@@ -12624,13 +12660,13 @@ This cannot be undone.`)) {
         gap: 12
       } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 24, opacity: 0.3 } }, "?"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 12, color: "#444" } }, catTrophies.length - earned.length, " more ", cat.label.toLowerCase(), " ", catTrophies.length - earned.length === 1 ? "trophy" : "trophies", " undiscovered"))));
     }), (() => {
-      const totalUnearned = TROPHIES.filter((t) => !(state2.trophies || {})[t.id]);
-      const earnedCount = Object.keys(state2.trophies || {}).length;
+      const totalUnearned = TROPHIES.filter((t) => !(state.trophies || {})[t.id]);
+      const earnedCount = Object.keys(state.trophies || {}).length;
       if (earnedCount === 0 || totalUnearned.length === 0) return null;
       return /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "center", padding: "24px 0", color: "#333", fontSize: 12 } }, totalUnearned.length, " ", totalUnearned.length === 1 ? "trophy" : "trophies", " remain hidden");
-    })()), view === "stats" && /* @__PURE__ */ import_react.default.createElement("div", { style: S.content }, /* @__PURE__ */ import_react.default.createElement("div", { style: { padding: "16px 2px 14px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, color: "#1a1814", fontWeight: 700 } }, "Your Progress"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080" } }, "Day ", state2.currentDay)), totalScore > 0 && (() => {
+    })()), view === "stats" && /* @__PURE__ */ import_react.default.createElement("div", { style: S.content }, /* @__PURE__ */ import_react.default.createElement("div", { style: { padding: "16px 2px 14px", display: "flex", justifyContent: "space-between", alignItems: "baseline" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 22, color: "#1a1814", fontWeight: 700 } }, "Your Progress"), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080" } }, "Day ", state.currentDay)), totalScore > 0 && (() => {
       var _a2;
-      const scoreDays = Object.entries(state2.scoreLog || {}).sort((a, b) => parseInt(b[0].replace("day_", "")) - parseInt(a[0].replace("day_", ""))).slice(0, 7);
+      const scoreDays = Object.entries(state.scoreLog || {}).sort((a, b) => parseInt(b[0].replace("day_", "")) - parseInt(a[0].replace("day_", ""))).slice(0, 7);
       const avgScore = scoreDays.length > 0 ? Math.round(scoreDays.reduce((s, [, d]) => s + d.total, 0) / scoreDays.length) : 0;
       const bestDay = scoreDays.reduce((best, [k, d]) => {
         var _a3;
@@ -12650,8 +12686,8 @@ This cannot be undone.`)) {
           justifyContent: "space-between"
         } }, /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 13, fontWeight: 600, color: "#1a1814" } }, "Day ", dayNum), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080", marginTop: 2 } }, ((_a3 = breakdown.checks) == null ? void 0 : _a3.length) || 0, " checks", ((_b2 = breakdown.boons) == null ? void 0 : _b2.length) > 0 && ` \xB7 ${breakdown.boons.length} boon${breakdown.boons.length > 1 ? "s" : ""}`, ((_c2 = breakdown.crossBoons) == null ? void 0 : _c2.length) > 0 && ` \xB7 ${breakdown.crossBoons.length} synergy`, breakdown.stackBonus > 0 && ` \xB7 +${breakdown.stackBonus} stack`)), /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "right" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 24, fontWeight: 700, color: "#C4973A" } }, "+", breakdown.total), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 10, color: "#b0a080" } }, "pts")));
       }));
-    })(), (state2.weightLog || []).length > 0 && (() => {
-      const log = state2.weightLog;
+    })(), (state.weightLog || []).length > 0 && (() => {
+      const log = state.weightLog;
       const weights = log.map((e) => e.weight);
       const min = Math.min(...weights), max = Math.max(...weights);
       const range = max - min || 1;
@@ -12671,15 +12707,15 @@ This cannot be undone.`)) {
     })(), visiblePillars.map((p) => {
       const col = p.color;
       const activeStreak = streaks[`${p.id}_active`] || 0;
-      const checkCounts = getPool(p.id, state2 == null ? void 0 : state2.bodyType, state2 == null ? void 0 : state2.soulLevel, { creativeProject: state2 == null ? void 0 : state2.creativeProject, learningSubject: state2 == null ? void 0 : state2.learningSubject }).map((c) => ({ c, count: streaks[`${p.id}_${c.id}`] || 0 })).filter((x) => x.count > 0).sort((a, b) => b.count - a.count);
-      const earnedBoons = state2.boons.filter((id) => BOONS.find((b) => b.id === id && b.pillar === p.id));
+      const checkCounts = getPool(p.id, state == null ? void 0 : state.bodyType, state == null ? void 0 : state.soulLevel, { creativeProject: state == null ? void 0 : state.creativeProject, learningSubject: state == null ? void 0 : state.learningSubject }).map((c) => ({ c, count: streaks[`${p.id}_${c.id}`] || 0 })).filter((x) => x.count > 0).sort((a, b) => b.count - a.count);
+      const earnedBoons = state.boons.filter((id) => BOONS.find((b) => b.id === id && b.pillar === p.id));
       return /* @__PURE__ */ import_react.default.createElement("div", { key: p.id, style: { background: "#fff", borderRadius: 22, padding: "18px 20px", marginBottom: 14, boxShadow: "0 2px 12px rgba(0,0,0,0.06)" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", alignItems: "center", gap: 10 } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { width: 38, height: 38, borderRadius: 12, background: col, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: "#fff", fontWeight: 700 } }, p.icon), /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 18, fontWeight: 700, color: "#1a1814" } }, p.name), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 11, color: "#b0a080" } }, p.desc))), /* @__PURE__ */ import_react.default.createElement("div", { style: { textAlign: "right" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 28, fontWeight: 700, color: activeStreak > 0 ? col : "#d0c8b8", lineHeight: 1 } }, activeStreak), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.06em" } }, "day streak"))), checkCounts.length === 0 ? /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 12, color: "#c0b8a8", fontStyle: "italic" } }, "No completions yet") : /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexDirection: "column", gap: 10 } }, checkCounts.map(({ c, count }) => {
         const goal = [3, 5, 7, 10].find((n) => n > count) || 10;
         const pct = Math.min(100, count / goal * 100);
         return /* @__PURE__ */ import_react.default.createElement("div", { key: c.id }, /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 5 } }, /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 13, color: "#1a1814" } }, c.label), /* @__PURE__ */ import_react.default.createElement("span", { style: { fontSize: 13, fontWeight: 700, color: col } }, count, "\xD7")), /* @__PURE__ */ import_react.default.createElement("div", { style: { height: 7, background: "#ECEEF8", borderRadius: 4, overflow: "hidden" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { height: "100%", width: `${pct}%`, background: col, borderRadius: 4, transition: "width 0.5s ease" } })), /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 10, color: "#c0b8a8", marginTop: 3 } }, count >= goal ? /* @__PURE__ */ import_react.default.createElement("span", { style: { color: col, fontWeight: 600 } }, "Milestone reached!") : `${count} / ${goal} to next milestone`));
       })), earnedBoons.length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { marginTop: 14, paddingTop: 12, borderTop: "1px solid #ECEEF8" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontSize: 10, color: "#b0a080", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 7 } }, "Boons earned"), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6 } }, earnedBoons.map((id) => {
         const b = BOONS.find((x) => x.id === id);
-        const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow } = getBoonStatus(b, state2.checkins, state2.boons, streaks, state2);
+        const { dormant, count: rebuildCount, needed: rebuildNeeded, window: rebuildWindow } = getBoonStatus(b, state.checkins, state.boons, streaks, state);
         return /* @__PURE__ */ import_react.default.createElement("span", { key: id, onClick: () => setInsightItem(b), style: {
           fontSize: 12,
           fontWeight: 500,
@@ -12690,7 +12726,7 @@ This cannot be undone.`)) {
           cursor: "pointer"
         } }, dormant ? "\u25CB" : "\u2726", " ", b == null ? void 0 : b.name);
       }))));
-    }), state2.boons.filter((id) => BOONS.find((b) => b.id === id && b.pillar === "synergy")).length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { background: "#fff", borderRadius: 22, padding: "18px 20px", marginBottom: 14, boxShadow: "0 2px 12px rgba(0,0,0,0.06)" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 18, fontWeight: 700, color: "#3D5A8A", marginBottom: 10 } }, "\u2726 Synergy"), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6 } }, state2.boons.filter((id) => BOONS.find((b) => b.id === id && b.pillar === "synergy")).map((id) => {
+    }), state.boons.filter((id) => BOONS.find((b) => b.id === id && b.pillar === "synergy")).length > 0 && /* @__PURE__ */ import_react.default.createElement("div", { style: { background: "#fff", borderRadius: 22, padding: "18px 20px", marginBottom: 14, boxShadow: "0 2px 12px rgba(0,0,0,0.06)" } }, /* @__PURE__ */ import_react.default.createElement("div", { style: { fontFamily: "'Cormorant Garamond',serif", fontSize: 18, fontWeight: 700, color: "#3D5A8A", marginBottom: 10 } }, "\u2726 Synergy"), /* @__PURE__ */ import_react.default.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: 6 } }, state.boons.filter((id) => BOONS.find((b) => b.id === id && b.pillar === "synergy")).map((id) => {
       const b = BOONS.find((x) => x.id === id);
       return /* @__PURE__ */ import_react.default.createElement("span", { key: id, onClick: () => setInsightItem(b), style: { fontSize: 12, fontWeight: 500, background: "#EEF0F8", color: "#3D5A8A", borderRadius: 12, padding: "5px 11px", cursor: "pointer" } }, "\u2726 ", b == null ? void 0 : b.name);
     })))));
@@ -12793,7 +12829,7 @@ react-dom/cjs/react-dom.production.min.js:
    * This source code is licensed under the MIT license found in the
    * LICENSE file in the root directory of this source tree.
    *)
-*/  // remove trailing ;
+*/
   } catch(e) {
     document.getElementById('root').innerHTML = '<pre style="color:red;padding:20px;font-size:11px;white-space:pre-wrap">' + e.stack + '</pre>';
   }
